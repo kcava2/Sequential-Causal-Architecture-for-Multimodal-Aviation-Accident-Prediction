@@ -30,4 +30,24 @@ graph TD
     style B fill:#005fb8,color:#fff
     style C fill:#005fb8,color:#fff
 ```
+
+## Dataset
+
+Data Sources
+- **NTSB Accident Database:** 
+- **NTSB Recommendation Database:**
+- **Employment:**
+
+Data Attributes
+- Accident ID:
+- Employment Records: 
+- Light Conditions:
+- Basic Meterological Conditions: IMC or VMC
+- Wind Conditions:
+- Temperature:
+- Personnel Conditions:
+- Supervisory Conditions:
+- Operator Conditions:
+- Unsafe Conditions:
+
 ## Requirements
