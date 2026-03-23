@@ -39,15 +39,44 @@ Data Sources
 - **Employment:**
 
 Data Attributes
-- Accident ID:
-- Employment Records: 
-- Light Conditions:
-- Basic Meterological Conditions: IMC or VMC
-- Wind Conditions:
-- Temperature:
-- Personnel Conditions:
-- Supervisory Conditions:
-- Operator Conditions:
-- Unsafe Conditions:
+- Accident ID: Nominal (ID)
+  - Record ID
+- Employment Records: Numeric (%)
+  - Employment Change vs Prior Period 
+- Light Conditions: Nominal 
+- Basic Meterological Conditions: Nominal
+  - IMC
+  - VMC
+- Wind Conditions: Numeric (Raw)
+- Temperature: Numerical (Raw)
+- Personnel Conditions: Nominal
+  - Crew Resource Management
+  - Personal Readiness
+- Supervisory Conditions: Nominal
+  - Inadequate Supervision
+  - Planned Inappropriate Operations
+  - Failed to Correct Known Problem
+  - Supervisory Violations
+- Operator Conditions: Nominal
+  - Adverse Mental State
+  - Adverse Physiological State
+  - Physical Limitations
+  - Mental Limitations
+- Unsafe Conditions: Nominal
+  - Decision Errors
+  - Skill-based Errors
+  - Perceptual Errors
+  - Routine Violations
+  - Exceptional Violations
+
+## Evaluation
+
+We will be comparing performance across three different data mining methods, both classical and deep learning methods. This includes random forest, bayesian network, and LSTM network. We will be using the following to analyze each of their performance:
+- Accuracy
+- Weighted F1-score (weighted more towards recall)
+- Confusion Matrix
+- Feature Importance Analysis (SHAP)
+- Sensitivity Analysis
+- Statistical Analysis
 
 ## Requirements
