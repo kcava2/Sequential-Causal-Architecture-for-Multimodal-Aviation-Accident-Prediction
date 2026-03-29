@@ -77,12 +77,15 @@ def get_dataloaders(filepath, test_split=0.2, batch_size=32, seed=42):
 
     return train_loader, test_loader, full
 
-train_loader, test_loader, dataset = get_dataloaders("HFACS_Simulated_Dataset.xlsx")
+if __name__ == "__main__":
+    import os
+    filepath = os.path.join(os.path.dirname(__file__), "Simulated_Dataset.xlsx")
+    train_loader, test_loader, dataset = get_dataloaders(filepath)
 
-# Check input/output dimensions
-n_features  = dataset.X.shape[1]   # 8 (3 numerical + 5 categorical)
-n_classes   = len(dataset.target_encoder.classes_)  # 5 unsafe condition types
+    # Check input/output dimensions
+    n_features  = dataset.X.shape[1]   # 8 (3 numerical + 5 categorical)
+    n_classes   = len(dataset.target_encoder.classes_)  # 5 unsafe condition types
 
-for X_batch, y_batch in train_loader:
-    print(X_batch.shape, y_batch.shape)
-    break
+    for X_batch, y_batch in train_loader:
+        print(X_batch.shape, y_batch.shape)
+        break
