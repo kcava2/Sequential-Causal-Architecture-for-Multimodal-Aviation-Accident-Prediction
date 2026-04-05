@@ -1,101 +1,101 @@
 true_supervisory,pred_supervisory,true_operator,pred_operator,true_unsafe_acts,pred_unsafe_acts
 Failed to Correct Problem,Planned Inappropriate Operations,Physical/Mental Limitations,Adverse Mental State,Skill-Based Errors,Routine Violations
-Inadequate Supervision,Inadequate Supervision,Physical/Mental Limitations,Adverse Physiological State,Skill-Based Errors,Skill-Based Errors
+Inadequate Supervision,Inadequate Supervision,Physical/Mental Limitations,Adverse Physiological State,Skill-Based Errors,Perceptual Errors
 Planned Inappropriate Operations,Planned Inappropriate Operations,Adverse Mental State,Adverse Physiological State,Decision Errors,Skill-Based Errors
-Supervisory Violations,Inadequate Supervision,Adverse Physiological State,Adverse Mental State,Skill-Based Errors,Skill-Based Errors
-Inadequate Supervision,Failed to Correct Problem,Adverse Mental State,Adverse Physiological State,Decision Errors,Exceptional Violations
+Supervisory Violations,Inadequate Supervision,Adverse Physiological State,Adverse Mental State,Skill-Based Errors,Perceptual Errors
+Inadequate Supervision,Failed to Correct Problem,Adverse Mental State,Adverse Physiological State,Decision Errors,Skill-Based Errors
 Planned Inappropriate Operations,Planned Inappropriate Operations,Adverse Physiological State,Adverse Mental State,Exceptional Violations,Routine Violations
-Inadequate Supervision,Inadequate Supervision,Adverse Physiological State,Adverse Physiological State,Routine Violations,Decision Errors
+Inadequate Supervision,Inadequate Supervision,Adverse Physiological State,Adverse Physiological State,Routine Violations,Skill-Based Errors
 Failed to Correct Problem,Planned Inappropriate Operations,Adverse Physiological State,Adverse Mental State,Routine Violations,Skill-Based Errors
 Planned Inappropriate Operations,Inadequate Supervision,Adverse Mental State,Adverse Physiological State,Decision Errors,Exceptional Violations
-Planned Inappropriate Operations,Planned Inappropriate Operations,Adverse Mental State,Adverse Mental State,Routine Violations,Perceptual Errors
+Planned Inappropriate Operations,Planned Inappropriate Operations,Adverse Mental State,Adverse Mental State,Routine Violations,Decision Errors
 Planned Inappropriate Operations,Planned Inappropriate Operations,Adverse Mental State,Adverse Mental State,Routine Violations,Routine Violations
 Supervisory Violations,Planned Inappropriate Operations,Adverse Mental State,Physical/Mental Limitations,Routine Violations,Exceptional Violations
 Inadequate Supervision,Inadequate Supervision,Adverse Physiological State,Physical/Mental Limitations,Decision Errors,Decision Errors
-Inadequate Supervision,Failed to Correct Problem,Physical/Mental Limitations,Adverse Mental State,Perceptual Errors,Routine Violations
-Supervisory Violations,Inadequate Supervision,Adverse Physiological State,Adverse Physiological State,Routine Violations,Perceptual Errors
-Planned Inappropriate Operations,Failed to Correct Problem,Adverse Physiological State,Physical/Mental Limitations,Perceptual Errors,Skill-Based Errors
+Inadequate Supervision,Failed to Correct Problem,Physical/Mental Limitations,Physical/Mental Limitations,Perceptual Errors,Routine Violations
+Supervisory Violations,Inadequate Supervision,Adverse Physiological State,Adverse Mental State,Routine Violations,Perceptual Errors
+Planned Inappropriate Operations,Inadequate Supervision,Adverse Physiological State,Physical/Mental Limitations,Perceptual Errors,Skill-Based Errors
 Supervisory Violations,Inadequate Supervision,Physical/Mental Limitations,Physical/Mental Limitations,Perceptual Errors,Perceptual Errors
 Planned Inappropriate Operations,Inadequate Supervision,Adverse Physiological State,Adverse Physiological State,Skill-Based Errors,Skill-Based Errors
-Failed to Correct Problem,Inadequate Supervision,Physical/Mental Limitations,Adverse Physiological State,Skill-Based Errors,Perceptual Errors
-Planned Inappropriate Operations,Planned Inappropriate Operations,Adverse Physiological State,Adverse Mental State,Decision Errors,Routine Violations
-Failed to Correct Problem,Inadequate Supervision,Adverse Mental State,Adverse Physiological State,Perceptual Errors,Decision Errors
+Failed to Correct Problem,Inadequate Supervision,Physical/Mental Limitations,Adverse Mental State,Skill-Based Errors,Perceptual Errors
+Planned Inappropriate Operations,Planned Inappropriate Operations,Adverse Physiological State,Adverse Mental State,Decision Errors,Decision Errors
+Failed to Correct Problem,Inadequate Supervision,Adverse Mental State,Adverse Physiological State,Perceptual Errors,Perceptual Errors
 Supervisory Violations,Inadequate Supervision,Adverse Mental State,Physical/Mental Limitations,Decision Errors,Perceptual Errors
-Planned Inappropriate Operations,Inadequate Supervision,Adverse Physiological State,Adverse Physiological State,Skill-Based Errors,Skill-Based Errors
+Planned Inappropriate Operations,Inadequate Supervision,Adverse Physiological State,Adverse Physiological State,Skill-Based Errors,Exceptional Violations
 Inadequate Supervision,Planned Inappropriate Operations,Adverse Mental State,Adverse Mental State,Skill-Based Errors,Skill-Based Errors
-Inadequate Supervision,Supervisory Violations,Adverse Mental State,Physical/Mental Limitations,Perceptual Errors,Routine Violations
-Inadequate Supervision,Planned Inappropriate Operations,Adverse Physiological State,Adverse Mental State,Decision Errors,Decision Errors
+Inadequate Supervision,Inadequate Supervision,Adverse Mental State,Adverse Mental State,Perceptual Errors,Routine Violations
+Inadequate Supervision,Planned Inappropriate Operations,Adverse Physiological State,Adverse Mental State,Decision Errors,Skill-Based Errors
 Inadequate Supervision,Inadequate Supervision,Adverse Physiological State,Physical/Mental Limitations,Perceptual Errors,Perceptual Errors
-Inadequate Supervision,Failed to Correct Problem,Adverse Physiological State,Adverse Mental State,Routine Violations,Skill-Based Errors
+Inadequate Supervision,Inadequate Supervision,Adverse Physiological State,Adverse Mental State,Routine Violations,Skill-Based Errors
 Planned Inappropriate Operations,Inadequate Supervision,Adverse Mental State,Adverse Physiological State,Decision Errors,Routine Violations
 Planned Inappropriate Operations,Planned Inappropriate Operations,Adverse Mental State,Adverse Mental State,Decision Errors,Routine Violations
-Planned Inappropriate Operations,Inadequate Supervision,Adverse Physiological State,Adverse Physiological State,Decision Errors,Skill-Based Errors
-Failed to Correct Problem,Inadequate Supervision,Physical/Mental Limitations,Adverse Mental State,Routine Violations,Exceptional Violations
+Planned Inappropriate Operations,Inadequate Supervision,Adverse Physiological State,Physical/Mental Limitations,Decision Errors,Skill-Based Errors
+Failed to Correct Problem,Planned Inappropriate Operations,Physical/Mental Limitations,Physical/Mental Limitations,Routine Violations,Exceptional Violations
 Inadequate Supervision,Planned Inappropriate Operations,Adverse Physiological State,Adverse Mental State,Skill-Based Errors,Skill-Based Errors
-Inadequate Supervision,Inadequate Supervision,Physical/Mental Limitations,Adverse Physiological State,Skill-Based Errors,Routine Violations
-Inadequate Supervision,Inadequate Supervision,Physical/Mental Limitations,Adverse Mental State,Decision Errors,Skill-Based Errors
-Planned Inappropriate Operations,Planned Inappropriate Operations,Adverse Physiological State,Adverse Mental State,Perceptual Errors,Decision Errors
-Inadequate Supervision,Inadequate Supervision,Adverse Mental State,Adverse Mental State,Routine Violations,Decision Errors
+Inadequate Supervision,Inadequate Supervision,Physical/Mental Limitations,Adverse Physiological State,Skill-Based Errors,Perceptual Errors
+Inadequate Supervision,Inadequate Supervision,Physical/Mental Limitations,Adverse Physiological State,Decision Errors,Exceptional Violations
+Planned Inappropriate Operations,Planned Inappropriate Operations,Adverse Physiological State,Adverse Mental State,Perceptual Errors,Skill-Based Errors
+Inadequate Supervision,Failed to Correct Problem,Adverse Mental State,Adverse Mental State,Routine Violations,Perceptual Errors
 Inadequate Supervision,Supervisory Violations,Adverse Physiological State,Physical/Mental Limitations,Routine Violations,Routine Violations
 Planned Inappropriate Operations,Failed to Correct Problem,Adverse Physiological State,Adverse Physiological State,Perceptual Errors,Routine Violations
-Failed to Correct Problem,Planned Inappropriate Operations,Adverse Physiological State,Adverse Mental State,Decision Errors,Perceptual Errors
+Failed to Correct Problem,Inadequate Supervision,Adverse Physiological State,Adverse Mental State,Decision Errors,Skill-Based Errors
 Inadequate Supervision,Planned Inappropriate Operations,Adverse Physiological State,Adverse Mental State,Decision Errors,Decision Errors
 Failed to Correct Problem,Inadequate Supervision,Adverse Physiological State,Adverse Physiological State,Decision Errors,Perceptual Errors
-Failed to Correct Problem,Inadequate Supervision,Adverse Mental State,Physical/Mental Limitations,Decision Errors,Skill-Based Errors
-Failed to Correct Problem,Inadequate Supervision,Adverse Physiological State,Adverse Mental State,Decision Errors,Routine Violations
+Failed to Correct Problem,Inadequate Supervision,Adverse Mental State,Adverse Mental State,Decision Errors,Skill-Based Errors
+Failed to Correct Problem,Inadequate Supervision,Adverse Physiological State,Physical/Mental Limitations,Decision Errors,Exceptional Violations
 Supervisory Violations,Inadequate Supervision,Adverse Mental State,Adverse Mental State,Decision Errors,Routine Violations
-Inadequate Supervision,Planned Inappropriate Operations,Physical/Mental Limitations,Adverse Physiological State,Skill-Based Errors,Exceptional Violations
-Inadequate Supervision,Planned Inappropriate Operations,Adverse Mental State,Adverse Mental State,Exceptional Violations,Routine Violations
+Inadequate Supervision,Planned Inappropriate Operations,Physical/Mental Limitations,Adverse Mental State,Skill-Based Errors,Exceptional Violations
+Inadequate Supervision,Planned Inappropriate Operations,Adverse Mental State,Adverse Mental State,Exceptional Violations,Skill-Based Errors
 Supervisory Violations,Planned Inappropriate Operations,Adverse Mental State,Adverse Mental State,Perceptual Errors,Exceptional Violations
-Planned Inappropriate Operations,Inadequate Supervision,Adverse Physiological State,Adverse Mental State,Routine Violations,Perceptual Errors
+Planned Inappropriate Operations,Failed to Correct Problem,Adverse Physiological State,Adverse Mental State,Routine Violations,Skill-Based Errors
 Planned Inappropriate Operations,Inadequate Supervision,Adverse Physiological State,Physical/Mental Limitations,Routine Violations,Perceptual Errors
-Failed to Correct Problem,Inadequate Supervision,Adverse Physiological State,Adverse Mental State,Decision Errors,Skill-Based Errors
+Failed to Correct Problem,Inadequate Supervision,Adverse Physiological State,Adverse Mental State,Decision Errors,Decision Errors
 Failed to Correct Problem,Planned Inappropriate Operations,Adverse Mental State,Physical/Mental Limitations,Routine Violations,Routine Violations
-Supervisory Violations,Planned Inappropriate Operations,Adverse Physiological State,Adverse Mental State,Decision Errors,Skill-Based Errors
+Supervisory Violations,Inadequate Supervision,Adverse Physiological State,Adverse Mental State,Decision Errors,Skill-Based Errors
 Supervisory Violations,Failed to Correct Problem,Adverse Mental State,Adverse Physiological State,Perceptual Errors,Routine Violations
 Failed to Correct Problem,Inadequate Supervision,Physical/Mental Limitations,Adverse Mental State,Skill-Based Errors,Routine Violations
 Inadequate Supervision,Supervisory Violations,Physical/Mental Limitations,Adverse Physiological State,Exceptional Violations,Skill-Based Errors
-Supervisory Violations,Inadequate Supervision,Adverse Physiological State,Adverse Physiological State,Decision Errors,Skill-Based Errors
+Supervisory Violations,Inadequate Supervision,Adverse Physiological State,Adverse Physiological State,Decision Errors,Perceptual Errors
 Inadequate Supervision,Planned Inappropriate Operations,Adverse Mental State,Physical/Mental Limitations,Decision Errors,Decision Errors
-Inadequate Supervision,Inadequate Supervision,Adverse Physiological State,Adverse Mental State,Exceptional Violations,Decision Errors
-Supervisory Violations,Inadequate Supervision,Adverse Mental State,Physical/Mental Limitations,Decision Errors,Decision Errors
-Inadequate Supervision,Planned Inappropriate Operations,Adverse Physiological State,Adverse Mental State,Perceptual Errors,Skill-Based Errors
+Inadequate Supervision,Inadequate Supervision,Adverse Physiological State,Adverse Mental State,Exceptional Violations,Skill-Based Errors
+Supervisory Violations,Inadequate Supervision,Adverse Mental State,Adverse Physiological State,Decision Errors,Routine Violations
+Inadequate Supervision,Inadequate Supervision,Adverse Physiological State,Adverse Mental State,Perceptual Errors,Skill-Based Errors
 Inadequate Supervision,Inadequate Supervision,Adverse Mental State,Adverse Mental State,Routine Violations,Routine Violations
 Inadequate Supervision,Planned Inappropriate Operations,Physical/Mental Limitations,Adverse Mental State,Routine Violations,Decision Errors
 Supervisory Violations,Inadequate Supervision,Adverse Mental State,Adverse Mental State,Exceptional Violations,Skill-Based Errors
-Planned Inappropriate Operations,Planned Inappropriate Operations,Adverse Physiological State,Physical/Mental Limitations,Exceptional Violations,Decision Errors
+Planned Inappropriate Operations,Planned Inappropriate Operations,Adverse Physiological State,Physical/Mental Limitations,Exceptional Violations,Routine Violations
 Failed to Correct Problem,Inadequate Supervision,Adverse Physiological State,Adverse Physiological State,Decision Errors,Skill-Based Errors
-Inadequate Supervision,Inadequate Supervision,Adverse Physiological State,Adverse Physiological State,Routine Violations,Skill-Based Errors
-Failed to Correct Problem,Inadequate Supervision,Adverse Mental State,Adverse Physiological State,Perceptual Errors,Decision Errors
+Inadequate Supervision,Inadequate Supervision,Adverse Physiological State,Adverse Mental State,Routine Violations,Decision Errors
+Failed to Correct Problem,Inadequate Supervision,Adverse Mental State,Physical/Mental Limitations,Perceptual Errors,Decision Errors
 Failed to Correct Problem,Inadequate Supervision,Physical/Mental Limitations,Physical/Mental Limitations,Perceptual Errors,Routine Violations
 Inadequate Supervision,Inadequate Supervision,Adverse Physiological State,Adverse Mental State,Decision Errors,Exceptional Violations
-Planned Inappropriate Operations,Failed to Correct Problem,Adverse Physiological State,Adverse Mental State,Perceptual Errors,Skill-Based Errors
-Inadequate Supervision,Inadequate Supervision,Adverse Mental State,Adverse Physiological State,Exceptional Violations,Skill-Based Errors
-Supervisory Violations,Failed to Correct Problem,Adverse Physiological State,Adverse Mental State,Exceptional Violations,Exceptional Violations
+Planned Inappropriate Operations,Inadequate Supervision,Adverse Physiological State,Adverse Physiological State,Perceptual Errors,Skill-Based Errors
+Inadequate Supervision,Inadequate Supervision,Adverse Mental State,Adverse Physiological State,Exceptional Violations,Decision Errors
+Supervisory Violations,Failed to Correct Problem,Adverse Physiological State,Adverse Mental State,Exceptional Violations,Perceptual Errors
 Failed to Correct Problem,Planned Inappropriate Operations,Adverse Physiological State,Physical/Mental Limitations,Skill-Based Errors,Decision Errors
 Supervisory Violations,Inadequate Supervision,Adverse Mental State,Adverse Physiological State,Decision Errors,Routine Violations
 Inadequate Supervision,Inadequate Supervision,Adverse Mental State,Physical/Mental Limitations,Skill-Based Errors,Skill-Based Errors
 Failed to Correct Problem,Inadequate Supervision,Physical/Mental Limitations,Adverse Mental State,Routine Violations,Perceptual Errors
 Failed to Correct Problem,Planned Inappropriate Operations,Adverse Mental State,Adverse Mental State,Routine Violations,Routine Violations
 Failed to Correct Problem,Inadequate Supervision,Adverse Mental State,Physical/Mental Limitations,Skill-Based Errors,Routine Violations
-Supervisory Violations,Failed to Correct Problem,Adverse Physiological State,Adverse Physiological State,Decision Errors,Decision Errors
+Supervisory Violations,Inadequate Supervision,Adverse Physiological State,Adverse Physiological State,Decision Errors,Routine Violations
 Planned Inappropriate Operations,Inadequate Supervision,Physical/Mental Limitations,Adverse Mental State,Skill-Based Errors,Decision Errors
 Inadequate Supervision,Planned Inappropriate Operations,Adverse Mental State,Adverse Mental State,Skill-Based Errors,Exceptional Violations
-Failed to Correct Problem,Planned Inappropriate Operations,Adverse Physiological State,Physical/Mental Limitations,Exceptional Violations,Perceptual Errors
-Failed to Correct Problem,Inadequate Supervision,Adverse Mental State,Physical/Mental Limitations,Perceptual Errors,Routine Violations
-Planned Inappropriate Operations,Inadequate Supervision,Adverse Mental State,Physical/Mental Limitations,Skill-Based Errors,Perceptual Errors
+Failed to Correct Problem,Planned Inappropriate Operations,Adverse Physiological State,Physical/Mental Limitations,Exceptional Violations,Routine Violations
+Failed to Correct Problem,Inadequate Supervision,Adverse Mental State,Physical/Mental Limitations,Perceptual Errors,Perceptual Errors
+Planned Inappropriate Operations,Inadequate Supervision,Adverse Mental State,Adverse Physiological State,Skill-Based Errors,Perceptual Errors
 Inadequate Supervision,Failed to Correct Problem,Adverse Mental State,Adverse Physiological State,Skill-Based Errors,Routine Violations
 Planned Inappropriate Operations,Inadequate Supervision,Physical/Mental Limitations,Adverse Mental State,Decision Errors,Decision Errors
 Inadequate Supervision,Planned Inappropriate Operations,Adverse Mental State,Physical/Mental Limitations,Exceptional Violations,Routine Violations
-Planned Inappropriate Operations,Inadequate Supervision,Adverse Mental State,Adverse Physiological State,Skill-Based Errors,Routine Violations
-Failed to Correct Problem,Inadequate Supervision,Adverse Physiological State,Physical/Mental Limitations,Skill-Based Errors,Perceptual Errors
-Failed to Correct Problem,Failed to Correct Problem,Physical/Mental Limitations,Adverse Physiological State,Skill-Based Errors,Routine Violations
+Planned Inappropriate Operations,Planned Inappropriate Operations,Adverse Mental State,Adverse Physiological State,Skill-Based Errors,Perceptual Errors
+Failed to Correct Problem,Inadequate Supervision,Adverse Physiological State,Adverse Mental State,Skill-Based Errors,Perceptual Errors
+Failed to Correct Problem,Inadequate Supervision,Physical/Mental Limitations,Adverse Physiological State,Skill-Based Errors,Routine Violations
 Inadequate Supervision,Planned Inappropriate Operations,Adverse Mental State,Adverse Mental State,Perceptual Errors,Decision Errors
-Planned Inappropriate Operations,Inadequate Supervision,Adverse Physiological State,Physical/Mental Limitations,Perceptual Errors,Exceptional Violations
+Planned Inappropriate Operations,Inadequate Supervision,Adverse Physiological State,Physical/Mental Limitations,Perceptual Errors,Decision Errors
 Inadequate Supervision,Planned Inappropriate Operations,Adverse Mental State,Adverse Physiological State,Routine Violations,Skill-Based Errors
-Inadequate Supervision,Inadequate Supervision,Adverse Physiological State,Adverse Mental State,Decision Errors,Skill-Based Errors
-Failed to Correct Problem,Planned Inappropriate Operations,Adverse Physiological State,Adverse Physiological State,Skill-Based Errors,Skill-Based Errors
+Inadequate Supervision,Inadequate Supervision,Adverse Physiological State,Adverse Mental State,Decision Errors,Routine Violations
+Failed to Correct Problem,Planned Inappropriate Operations,Adverse Physiological State,Adverse Physiological State,Skill-Based Errors,Decision Errors
 Supervisory Violations,Failed to Correct Problem,Adverse Physiological State,Adverse Physiological State,Decision Errors,Decision Errors
-Planned Inappropriate Operations,Planned Inappropriate Operations,Adverse Mental State,Adverse Physiological State,Perceptual Errors,Skill-Based Errors
+Planned Inappropriate Operations,Planned Inappropriate Operations,Adverse Mental State,Physical/Mental Limitations,Perceptual Errors,Skill-Based Errors
 Failed to Correct Problem,Planned Inappropriate Operations,Adverse Mental State,Physical/Mental Limitations,Decision Errors,Routine Violations
-Supervisory Violations,Inadequate Supervision,Adverse Mental State,Adverse Mental State,Perceptual Errors,Decision Errors
+Supervisory Violations,Inadequate Supervision,Adverse Mental State,Adverse Mental State,Perceptual Errors,Routine Violations

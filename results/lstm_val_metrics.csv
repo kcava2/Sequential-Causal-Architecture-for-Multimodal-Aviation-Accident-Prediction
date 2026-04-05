@@ -1,0 +1,2 @@
+val_loss,acc_supervisory,acc_operator,acc_unsafe_acts,acc_avg,n_samples
+1.450369954109192,0.49,0.93,1.0,0.8066666666666666,100
