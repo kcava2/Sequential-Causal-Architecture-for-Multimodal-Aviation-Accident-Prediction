@@ -20,10 +20,11 @@ The following diagram illustrates the structural flow of our prediction model wi
 
 ```mermaid
 graph TD
-    E[e: Environmental Conditions] --> B
+    F[f: Environmental Conditions] --> B
     D[d: Airline Employee Records] --> A[A: Supervisory Conditions]
+    E[e: Organizational Climate] --> A[A: Supervisory Conditions]
     A --> B[B: Operator Conditions]
-    F[f: Personnel Conditions] --> B
+    G[g: Personnel Conditions] --> B
     B --> C[C: Unsafe Acts]
 
     style A fill:#005fb8,color:#fff
