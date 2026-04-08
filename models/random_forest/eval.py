@@ -17,7 +17,7 @@ A_f1 = f1_score(y_A_test, A_pred, average='macro')
 A_coh = cohen_kappa_score(y_A_test, A_pred)
 
 print(f"""
-      ---Model 3---
+      ---Model 1 (A)---
         Accuracy : {A_acc}
         Recall   : {A_rec}
         F1-Score : {A_f1}
@@ -33,7 +33,7 @@ B_f1 = f1_score(y_B_test, B_pred, average='macro')
 B_coh = cohen_kappa_score(y_B_test, B_pred)
 
 print(f"""
-      ---Model 3---
+      ---Model 2 (B)---
         Accuracy : {B_acc}
         Recall   : {B_rec}
         F1-Score : {B_f1}
@@ -49,7 +49,7 @@ C_f1 = f1_score(y_C_test, C_pred, average='macro')
 C_coh = cohen_kappa_score(y_C_test, C_pred)
 
 print(f"""
-      ---Model 3---
+      ---Model 3 (C)---
         Accuracy : {C_acc}
         Recall   : {C_rec}
         F1-Score : {C_f1}
