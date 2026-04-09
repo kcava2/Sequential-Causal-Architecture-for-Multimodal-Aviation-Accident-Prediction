@@ -1,0 +1,243 @@
+true_supervisory,pred_supervisory,true_operator,pred_operator,true_unsafe_acts,pred_unsafe_acts
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Planned Inappropriate Operations,Inadequate Supervision,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Adverse Mental State,Adverse Mental State,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Adverse Mental State,Adverse Mental State,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Adverse Mental State,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Failed to Correct Known Problem,Inadequate Supervision,Adverse Physiological State,Adverse Physiological State,Decision Errors,Skill-based Errors
+Failed to Correct Known Problem,Inadequate Supervision,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Failed to Correct Known Problem,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Failed to Correct Known Problem,Inadequate Supervision,Adverse Physiological State,Adverse Physiological State,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Adverse Mental State,Mental Limitations,Skill-based Errors,Skill-based Errors
+Failed to Correct Known Problem,Inadequate Supervision,Adverse Physiological State,Adverse Physiological State,Skill-based Errors,Skill-based Errors
+Planned Inappropriate Operations,Inadequate Supervision,Mental Limitations,Adverse Physiological State,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Supervisory Violations,Adverse Mental State,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Failed to Correct Known Problem,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Failed to Correct Known Problem,Mental Limitations,Mental Limitations,Decision Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Adverse Mental State,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Failed to Correct Known Problem,Inadequate Supervision,Adverse Mental State,Adverse Physiological State,Decision Errors,Skill-based Errors
+Failed to Correct Known Problem,Planned Inappropriate Operations,Adverse Physiological State,Adverse Physiological State,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Adverse Mental State,Mental Limitations,Skill-based Errors,Skill-based Errors
+Failed to Correct Known Problem,Inadequate Supervision,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Planned Inappropriate Operations,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Failed to Correct Known Problem,Inadequate Supervision,Mental Limitations,Mental Limitations,Perceptual Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Adverse Physiological State,Decision Errors,Skill-based Errors
+Failed to Correct Known Problem,Inadequate Supervision,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Mental Limitations,Perceptual Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Adverse Mental State,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Adverse Mental State,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Adverse Mental State,Adverse Mental State,Decision Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Failed to Correct Known Problem,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Failed to Correct Known Problem,Inadequate Supervision,Adverse Physiological State,Adverse Physiological State,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Failed to Correct Known Problem,Inadequate Supervision,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Adverse Mental State,Decision Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Planned Inappropriate Operations,Inadequate Supervision,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Adverse Mental State,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Adverse Mental State,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Adverse Mental State,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Adverse Mental State,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Failed to Correct Known Problem,Inadequate Supervision,Mental Limitations,Adverse Mental State,Skill-based Errors,Skill-based Errors
+Failed to Correct Known Problem,Inadequate Supervision,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Failed to Correct Known Problem,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Failed to Correct Known Problem,Inadequate Supervision,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Planned Inappropriate Operations,Inadequate Supervision,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Planned Inappropriate Operations,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Mental Limitations,Perceptual Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Adverse Mental State,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Adverse Mental State,Adverse Mental State,Skill-based Errors,Skill-based Errors
+Failed to Correct Known Problem,Inadequate Supervision,Mental Limitations,Adverse Mental State,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Adverse Mental State,Adverse Mental State,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Adverse Mental State,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Adverse Mental State,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Adverse Mental State,Mental Limitations,Decision Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Adverse Mental State,Mental Limitations,Decision Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Adverse Mental State,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Adverse Mental State,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Adverse Mental State,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Supervisory Violations,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Adverse Mental State,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Planned Inappropriate Operations,Adverse Mental State,Adverse Mental State,Skill-based Errors,Decision Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Supervisory Violations,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Failed to Correct Known Problem,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Planned Inappropriate Operations,Inadequate Supervision,Adverse Mental State,Adverse Mental State,Decision Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Adverse Mental State,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Supervisory Violations,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Adverse Mental State,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Adverse Mental State,Decision Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Adverse Mental State,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Failed to Correct Known Problem,Mental Limitations,Mental Limitations,Decision Errors,Skill-based Errors
+Supervisory Violations,Supervisory Violations,Adverse Physiological State,Adverse Mental State,Routine Violations,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Mental Limitations,Routine Violations,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Failed to Correct Known Problem,Inadequate Supervision,Adverse Physiological State,Adverse Physiological State,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Adverse Mental State,Adverse Physiological State,Decision Errors,Skill-based Errors
+Supervisory Violations,Supervisory Violations,Mental Limitations,Adverse Physiological State,Routine Violations,Decision Errors
+Failed to Correct Known Problem,Failed to Correct Known Problem,Adverse Physiological State,Adverse Physiological State,Decision Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Adverse Physiological State,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Adverse Mental State,Decision Errors,Skill-based Errors
+Planned Inappropriate Operations,Supervisory Violations,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Adverse Physiological State,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Adverse Mental State,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Failed to Correct Known Problem,Inadequate Supervision,Adverse Physiological State,Adverse Physiological State,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Adverse Mental State,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Failed to Correct Known Problem,Adverse Mental State,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Adverse Mental State,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Mental Limitations,Decision Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Adverse Mental State,Mental Limitations,Perceptual Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Mental Limitations,Decision Errors,Skill-based Errors
+Inadequate Supervision,Failed to Correct Known Problem,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Failed to Correct Known Problem,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Adverse Mental State,Mental Limitations,Skill-based Errors,Skill-based Errors
+Planned Inappropriate Operations,Inadequate Supervision,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Adverse Physiological State,Mental Limitations,Decision Errors,Skill-based Errors
+Failed to Correct Known Problem,Inadequate Supervision,Adverse Physiological State,Adverse Physiological State,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Failed to Correct Known Problem,Inadequate Supervision,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Failed to Correct Known Problem,Inadequate Supervision,Adverse Physiological State,Adverse Physiological State,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Adverse Mental State,Adverse Mental State,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Adverse Mental State,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Adverse Mental State,Adverse Mental State,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Failed to Correct Known Problem,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Failed to Correct Known Problem,Inadequate Supervision,Mental Limitations,Mental Limitations,Routine Violations,Skill-based Errors
+Inadequate Supervision,Supervisory Violations,Adverse Mental State,Adverse Physiological State,Skill-based Errors,Decision Errors
+Inadequate Supervision,Planned Inappropriate Operations,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Failed to Correct Known Problem,Inadequate Supervision,Adverse Physiological State,Adverse Physiological State,Skill-based Errors,Skill-based Errors
+Failed to Correct Known Problem,Inadequate Supervision,Adverse Physiological State,Adverse Physiological State,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Adverse Physiological State,Mental Limitations,Decision Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Mental Limitations,Decision Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Adverse Mental State,Adverse Mental State,Decision Errors,Skill-based Errors
+Inadequate Supervision,Failed to Correct Known Problem,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Supervisory Violations,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Failed to Correct Known Problem,Inadequate Supervision,Adverse Physiological State,Adverse Physiological State,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Planned Inappropriate Operations,Failed to Correct Known Problem,Mental Limitations,Mental Limitations,Decision Errors,Skill-based Errors
+Inadequate Supervision,Failed to Correct Known Problem,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Failed to Correct Known Problem,Inadequate Supervision,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Planned Inappropriate Operations,Supervisory Violations,Adverse Physiological State,Adverse Physiological State,Skill-based Errors,Decision Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Adverse Mental State,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Adverse Mental State,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Planned Inappropriate Operations,Mental Limitations,Mental Limitations,Decision Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Adverse Physiological State,Decision Errors,Skill-based Errors
+Planned Inappropriate Operations,Inadequate Supervision,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Planned Inappropriate Operations,Failed to Correct Known Problem,Adverse Mental State,Mental Limitations,Decision Errors,Skill-based Errors
+Failed to Correct Known Problem,Inadequate Supervision,Mental Limitations,Mental Limitations,Routine Violations,Skill-based Errors
+Inadequate Supervision,Planned Inappropriate Operations,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Adverse Mental State,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Adverse Mental State,Mental Limitations,Decision Errors,Skill-based Errors
+Inadequate Supervision,Supervisory Violations,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Planned Inappropriate Operations,Adverse Mental State,Mental Limitations,Decision Errors,Skill-based Errors
+Inadequate Supervision,Supervisory Violations,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Adverse Mental State,Adverse Mental State,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Adverse Mental State,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Mental Limitations,Decision Errors,Skill-based Errors
+Failed to Correct Known Problem,Inadequate Supervision,Adverse Mental State,Adverse Physiological State,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Adverse Mental State,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Adverse Mental State,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Adverse Mental State,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Planned Inappropriate Operations,Adverse Mental State,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Mental Limitations,Decision Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Adverse Physiological State,Adverse Physiological State,Perceptual Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Failed to Correct Known Problem,Inadequate Supervision,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Mental Limitations,Decision Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Adverse Mental State,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Adverse Mental State,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Mental Limitations,Decision Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Adverse Mental State,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Adverse Physiological State,Skill-based Errors,Skill-based Errors
+Failed to Correct Known Problem,Supervisory Violations,Mental Limitations,Mental Limitations,Routine Violations,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Adverse Mental State,Skill-based Errors,Skill-based Errors
+Planned Inappropriate Operations,Supervisory Violations,Mental Limitations,Mental Limitations,Decision Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Planned Inappropriate Operations,Inadequate Supervision,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Adverse Mental State,Adverse Physiological State,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Adverse Mental State,Adverse Mental State,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Mental Limitations,Decision Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Adverse Mental State,Mental Limitations,Decision Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Adverse Mental State,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Failed to Correct Known Problem,Adverse Mental State,Mental Limitations,Skill-based Errors,Skill-based Errors
+Planned Inappropriate Operations,Failed to Correct Known Problem,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Mental Limitations,Decision Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Mental Limitations,Decision Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Planned Inappropriate Operations,Inadequate Supervision,Mental Limitations,Mental Limitations,Decision Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Adverse Physiological State,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Supervisory Violations,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Failed to Correct Known Problem,Inadequate Supervision,Adverse Physiological State,Adverse Physiological State,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Mental Limitations,Skill-based Errors,Skill-based Errors
+Inadequate Supervision,Inadequate Supervision,Mental Limitations,Adverse Physiological State,Skill-based Errors,Skill-based Errors

@@ -3,7 +3,7 @@ import sys
 import torch
 import torch.nn as nn
 import matplotlib.pyplot as plt
-from sklearn.metrics import balanced_accuracy_score
+from sklearn.metrics import balanced_accuracy_score, f1_score, cohen_kappa_score
 from sklearn.utils.class_weight import compute_class_weight
 import numpy as np
 
@@ -152,6 +152,82 @@ def evaluate(model, loader, device):
     return all_A, all_B, all_C, pred_A, pred_B, pred_C
 
 
+# ── Reusable training function ────────────────────────────────────────────────
+
+def train_model(
+    train_loader,
+    encoders,
+    hidden_size=64,
+    lr=3e-4,
+    dropout=0.2,
+    epochs=500,
+    device=None,
+    verbose=True,
+):
+    """
+    Train HFACSCausalLSTM and return (model, history).
+
+    Parameters
+    ----------
+    train_loader : DataLoader
+    encoders     : SCAMAAPEncoders
+    hidden_size  : int
+    lr           : float
+    dropout      : float
+    epochs       : int
+    device       : torch.device  (defaults to cuda if available)
+    verbose      : bool — print per-epoch progress
+
+    Returns
+    -------
+    model   : trained HFACSCausalLSTM
+    history : dict with lists 'loss', 'acc_A', 'acc_B', 'acc_C', 'acc_avg'
+    """
+    if device is None:
+        device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+    n_A = len(encoders.enc_supervisory.classes_)
+    n_B = len(encoders.enc_operator.classes_)
+    n_C = len(encoders.enc_unsafe.classes_)
+
+    model = HFACSCausalLSTM(
+        hidden_size=hidden_size, n_A=n_A, n_B=n_B, n_C=n_C, dropout=dropout,
+    ).to(device)
+
+    optimizer = torch.optim.Adam(model.parameters(), lr=lr)
+    scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
+        optimizer, mode="min", factor=0.5, patience=10, min_lr=1e-5
+    )
+
+    train_set = train_loader.dataset
+    crit_A = FocalLoss(weight=class_weights(train_set.y_A, n_A, device), gamma=2.0)
+    crit_B = FocalLoss(weight=class_weights(train_set.y_B, n_B, device), gamma=2.0)
+    crit_C = FocalLoss(weight=class_weights(train_set.y_C, n_C, device), gamma=2.0)
+
+    history = {"loss": [], "acc_A": [], "acc_B": [], "acc_C": [], "acc_avg": []}
+
+    for epoch in range(1, epochs + 1):
+        loss, acc_A, acc_B, acc_C, acc_avg = train_epoch(
+            model, train_loader, optimizer, crit_A, crit_B, crit_C, device
+        )
+        scheduler.step(loss)
+        history["loss"].append(loss)
+        history["acc_A"].append(acc_A)
+        history["acc_B"].append(acc_B)
+        history["acc_C"].append(acc_C)
+        history["acc_avg"].append(acc_avg)
+
+        if verbose:
+            current_lr = optimizer.param_groups[0]["lr"]
+            print(
+                f"Epoch {epoch:03d}/{epochs} | Loss: {loss:.4f} | "
+                f"BalAcc A: {acc_A:.2%}  B: {acc_B:.2%}  C: {acc_C:.2%}  Avg: {acc_avg:.2%} | "
+                f"LR: {current_lr:.2e}"
+            )
+
+    return model, history
+
+
 # ── Main ──────────────────────────────────────────────────────────────────────
 
 def main():
@@ -160,11 +236,10 @@ def main():
     BATCH_SIZE  = 32
     EPOCHS      = 500
     LR          = 3e-4
+    DROPOUT     = 0.2
     DEVICE      = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-    train_loader, _, _, encoders = get_dataloaders(
-        FILEPATH, batch_size=BATCH_SIZE
-    )
+    train_loader, _, _, encoders = get_dataloaders(FILEPATH, batch_size=BATCH_SIZE)
 
     n_A = len(encoders.enc_supervisory.classes_)
     n_B = len(encoders.enc_operator.classes_)
@@ -194,53 +269,48 @@ def main():
     print(f"Classes — A (Supervisory): {n_A}  B (Operator): {n_B}  C (Unsafe Acts): {n_C}")
     print()
 
-    model = HFACSCausalLSTM(
-        hidden_size=HIDDEN_SIZE, n_A=n_A, n_B=n_B, n_C=n_C,
-    ).to(DEVICE)
-
-    optimizer = torch.optim.Adam(model.parameters(), lr=LR)
-    scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
-        optimizer, mode="min", factor=0.5, patience=10, min_lr=1e-5
+    model, history = train_model(
+        train_loader, encoders,
+        hidden_size=HIDDEN_SIZE, lr=LR, dropout=DROPOUT, epochs=EPOCHS,
+        device=DEVICE, verbose=True,
     )
 
-    train_set = train_loader.dataset
-    crit_A = nn.CrossEntropyLoss(weight=class_weights(train_set.y_A, n_A, DEVICE))
-    crit_B = nn.CrossEntropyLoss(weight=class_weights(train_set.y_B, n_B, DEVICE))
-    crit_C = FocalLoss(weight=class_weights(train_set.y_C, n_C, DEVICE), gamma=2.0)
+    # ── Final training summary ────────────────────────────────────────────────
+    all_A, all_B, all_C, pred_A, pred_B, pred_C = evaluate(model, train_loader, DEVICE)
+    bal_A  = balanced_accuracy_score(all_A, pred_A)
+    bal_B  = balanced_accuracy_score(all_B, pred_B)
+    bal_C  = balanced_accuracy_score(all_C, pred_C)
+    f1_A   = f1_score(all_A, pred_A, average="macro", zero_division=0)
+    f1_B   = f1_score(all_B, pred_B, average="macro", zero_division=0)
+    f1_C   = f1_score(all_C, pred_C, average="macro", zero_division=0)
+    kap_A  = cohen_kappa_score(all_A, pred_A)
+    kap_B  = cohen_kappa_score(all_B, pred_B)
+    kap_C  = cohen_kappa_score(all_C, pred_C)
 
-    history = {"loss": [], "acc_A": [], "acc_B": [], "acc_C": [], "acc_avg": []}
-
-    for epoch in range(1, EPOCHS + 1):
-        loss, acc_A, acc_B, acc_C, acc_avg = train_epoch(
-            model, train_loader, optimizer, crit_A, crit_B, crit_C, DEVICE
-        )
-        scheduler.step(loss)
-        history["loss"].append(loss)
-        history["acc_A"].append(acc_A)
-        history["acc_B"].append(acc_B)
-        history["acc_C"].append(acc_C)
-        history["acc_avg"].append(acc_avg)
-        current_lr = optimizer.param_groups[0]["lr"]
-        print(
-            f"Epoch {epoch:03d}/{EPOCHS} | Loss: {loss:.4f} | "
-            f"BalAcc A: {acc_A:.2%}  B: {acc_B:.2%}  C: {acc_C:.2%}  Avg: {acc_avg:.2%} | "
-            f"LR: {current_lr:.2e}"
-        )
+    print(f"\n{'─' * 72}")
+    print("Final Training Metrics")
+    print(f"{'─' * 72}")
+    print(f"{'Metric':<22} {'A (Supervisory)':>16} {'B (Operator)':>14} {'C (Unsafe Acts)':>16}")
+    print(f"{'─' * 72}")
+    print(f"{'Balanced Accuracy':<22} {bal_A:>16.2%} {bal_B:>14.2%} {bal_C:>16.2%}")
+    print(f"{'Macro F1':<22} {f1_A:>16.4f} {f1_B:>14.4f} {f1_C:>16.4f}")
+    print(f"{'Cohen Kappa':<22} {kap_A:>16.4f} {kap_B:>14.4f} {kap_C:>16.4f}")
+    print(f"{'─' * 72}\n")
 
     # ── Plots ─────────────────────────────────────────────────────────────────
-    epochs = range(1, EPOCHS + 1)
+    epoch_range = range(1, EPOCHS + 1)
     _, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))
 
-    ax1.plot(epochs, history["loss"], color="steelblue")
+    ax1.plot(epoch_range, history["loss"], color="steelblue")
     ax1.set_title("Training Loss per Epoch")
     ax1.set_xlabel("Epoch")
     ax1.set_ylabel("Loss")
     ax1.grid(True)
 
-    ax2.plot(epochs, history["acc_A"], label="Supervisory (A)")
-    ax2.plot(epochs, history["acc_B"], label="Operator (B)")
-    ax2.plot(epochs, history["acc_C"], label="Unsafe Acts (C)")
-    ax2.plot(epochs, history["acc_avg"], linestyle="--", color="black", label="Average")
+    ax2.plot(epoch_range, history["acc_A"], label="Supervisory (A)")
+    ax2.plot(epoch_range, history["acc_B"], label="Operator (B)")
+    ax2.plot(epoch_range, history["acc_C"], label="Unsafe Acts (C)")
+    ax2.plot(epoch_range, history["acc_avg"], linestyle="--", color="black", label="Average")
     ax2.set_title("Training Balanced Accuracy per Epoch")
     ax2.set_xlabel("Epoch")
     ax2.set_ylabel("Balanced Accuracy")

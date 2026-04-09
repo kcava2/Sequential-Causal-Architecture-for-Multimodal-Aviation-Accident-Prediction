@@ -142,7 +142,7 @@ def get_dataloaders(filepath, test_split=0.2, val_split=0.1, batch_size=32, seed
 
     encoders = SCAMAAPEncoders(df_train)
 
-    # SMOTE on training split only — oversample minority classes of Unsafe Conditions (C)
+    # SMOTE on training split only — oversample minority classes for all three targets (A, B, C)
     _enc = encoders
 
     def _step0_array(df):
@@ -166,19 +166,79 @@ def get_dataloaders(filepath, test_split=0.2, val_split=0.1, batch_size=32, seed
     y_B_train     = _enc.enc_operator.transform(df_train["Operator Conditions"])
     y_C_train     = _enc.enc_unsafe.transform(df_train["Unsafe Conditions"])
 
-    sm = SMOTE(random_state=seed)
-    X_res, y_C_res = sm.fit_resample(X_train, y_C_train)
-
-    # For synthetic rows, find nearest original sample and inherit its labels/features
     from sklearn.neighbors import NearestNeighbors
-    nn = NearestNeighbors(n_neighbors=1).fit(X_train)
-    _, indices = nn.kneighbors(X_res)
-    idx = indices[:, 0]
-    y_A_res      = y_A_train[idx]
-    y_B_res      = y_B_train[idx]
-    step_a_res   = step_a_train[idx]
 
-    train_set = _SMOTEDataset(step_a_res, X_res, y_A_res, y_B_res, y_C_res)
+    def _safe_smote(X, y, seed):
+        """
+        Run SMOTE with k_neighbors automatically reduced for tiny classes.
+        Returns (X_synthetic, y_synthetic) — only the NEW synthetic rows, not the originals.
+        Returns (None, None) if the smallest class has only 1 sample (cannot interpolate).
+        """
+        counts = np.bincount(y)
+        min_count = counts[counts > 0].min()
+        if min_count < 2:
+            return None, None
+        k = min(5, min_count - 1)
+        sm = SMOTE(random_state=seed, k_neighbors=k)
+        X_res, y_res = sm.fit_resample(X, y)
+        return X_res[len(X):], y_res[len(y):]
+
+    # Single NN lookup — fit once on original X_train feature space
+    nn_lookup = NearestNeighbors(n_neighbors=1).fit(X_train)
+
+    def _inherit(X_synth, arrays):
+        """Find nearest original row for each synthetic row; return inherited label arrays."""
+        _, indices = nn_lookup.kneighbors(X_synth)
+        idx = indices[:, 0]
+        return [arr[idx] for arr in arrays]
+
+    # ── SMOTE for A ──────────────────────────────────────────────────────────
+    X_synth_A, y_A_synth = _safe_smote(X_train, y_A_train, seed)
+    if X_synth_A is not None:
+        step_a_synth_A, y_B_from_A, y_C_from_A = _inherit(
+            X_synth_A, [step_a_train, y_B_train, y_C_train]
+        )
+    else:
+        X_synth_A      = np.empty((0, X_train.shape[1]))
+        y_A_synth      = np.empty(0, dtype=y_A_train.dtype)
+        step_a_synth_A = np.empty((0, step_a_train.shape[1]))
+        y_B_from_A     = np.empty(0, dtype=y_B_train.dtype)
+        y_C_from_A     = np.empty(0, dtype=y_C_train.dtype)
+
+    # ── SMOTE for B ──────────────────────────────────────────────────────────
+    X_synth_B, y_B_synth = _safe_smote(X_train, y_B_train, seed)
+    if X_synth_B is not None:
+        step_a_synth_B, y_A_from_B, y_C_from_B = _inherit(
+            X_synth_B, [step_a_train, y_A_train, y_C_train]
+        )
+    else:
+        X_synth_B      = np.empty((0, X_train.shape[1]))
+        y_B_synth      = np.empty(0, dtype=y_B_train.dtype)
+        step_a_synth_B = np.empty((0, step_a_train.shape[1]))
+        y_A_from_B     = np.empty(0, dtype=y_A_train.dtype)
+        y_C_from_B     = np.empty(0, dtype=y_C_train.dtype)
+
+    # ── SMOTE for C ──────────────────────────────────────────────────────────
+    X_synth_C, y_C_synth = _safe_smote(X_train, y_C_train, seed)
+    if X_synth_C is not None:
+        step_a_synth_C, y_A_from_C, y_B_from_C = _inherit(
+            X_synth_C, [step_a_train, y_A_train, y_B_train]
+        )
+    else:
+        X_synth_C      = np.empty((0, X_train.shape[1]))
+        y_C_synth      = np.empty(0, dtype=y_C_train.dtype)
+        step_a_synth_C = np.empty((0, step_a_train.shape[1]))
+        y_A_from_C     = np.empty(0, dtype=y_A_train.dtype)
+        y_B_from_C     = np.empty(0, dtype=y_B_train.dtype)
+
+    # ── Pool: originals + all synthetic rows ──────────────────────────────────
+    X_final      = np.vstack([X_train,      X_synth_A,      X_synth_B,      X_synth_C])
+    step_a_final = np.vstack([step_a_train, step_a_synth_A, step_a_synth_B, step_a_synth_C])
+    y_A_final    = np.hstack([y_A_train,    y_A_synth,      y_A_from_B,     y_A_from_C])
+    y_B_final    = np.hstack([y_B_train,    y_B_from_A,     y_B_synth,      y_B_from_C])
+    y_C_final    = np.hstack([y_C_train,    y_C_from_A,     y_C_from_B,     y_C_synth])
+
+    train_set = _SMOTEDataset(step_a_final, X_final, y_A_final, y_B_final, y_C_final)
     val_set   = SCAMAAPSequenceDataset(df_val,  encoders)
     test_set  = SCAMAAPSequenceDataset(df_test, encoders)
 

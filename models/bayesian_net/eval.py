@@ -5,7 +5,8 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.metrics import (
-    classification_report, confusion_matrix, ConfusionMatrixDisplay, balanced_accuracy_score
+    classification_report, confusion_matrix, ConfusionMatrixDisplay,
+    balanced_accuracy_score, f1_score, cohen_kappa_score,
 )
 
 sys.path.append(os.path.join(os.path.dirname(__file__), "..", ".."))
@@ -37,10 +38,20 @@ def main():
     bal_B = balanced_accuracy_score(true_B, pred_B)
     bal_C = balanced_accuracy_score(true_C, pred_C)
 
-    print(f"Balanced Acc A (Supervisory): {bal_A:.2%}")
-    print(f"Balanced Acc B (Operator)   : {bal_B:.2%}")
-    print(f"Balanced Acc C (Unsafe Acts): {bal_C:.2%}")
-    print(f"Average                     : {(bal_A + bal_B + bal_C) / 3:.2%}\n")
+    f1_A = f1_score(true_A, pred_A, average="macro", zero_division=0)
+    f1_B = f1_score(true_B, pred_B, average="macro", zero_division=0)
+    f1_C = f1_score(true_C, pred_C, average="macro", zero_division=0)
+
+    kappa_A = cohen_kappa_score(true_A, pred_A)
+    kappa_B = cohen_kappa_score(true_B, pred_B)
+    kappa_C = cohen_kappa_score(true_C, pred_C)
+
+    print(f"{'Metric':<22} {'A (Supervisory)':>16} {'B (Operator)':>14} {'C (Unsafe Acts)':>16}")
+    print("-" * 72)
+    print(f"{'Balanced Accuracy':<22} {bal_A:>16.2%} {bal_B:>14.2%} {bal_C:>16.2%}")
+    print(f"{'Macro F1':<22} {f1_A:>16.4f} {f1_B:>14.4f} {f1_C:>16.4f}")
+    print(f"{'Cohen Kappa':<22} {kappa_A:>16.4f} {kappa_B:>14.4f} {kappa_C:>16.4f}")
+    print()
 
     print("── A: Supervisory Conditions ──")
     print(classification_report(true_A, pred_A, zero_division=0))
@@ -51,15 +62,22 @@ def main():
 
     # ── Per-class metrics CSV ─────────────────────────────────────────────────
     rows = []
-    for task_label, true, pred in [
-        ("Supervisory (A)", true_A, pred_A),
-        ("Operator (B)",    true_B, pred_B),
-        ("Unsafe Acts (C)", true_C, pred_C),
+    for task_label, true, pred, bal, f1, kappa in [
+        ("Supervisory (A)", true_A, pred_A, bal_A, f1_A, kappa_A),
+        ("Operator (B)",    true_B, pred_B, bal_B, f1_B, kappa_B),
+        ("Unsafe Acts (C)", true_C, pred_C, bal_C, f1_C, kappa_C),
     ]:
         report = classification_report(true, pred, zero_division=0, output_dict=True)
         for cls_name, metrics in report.items():
             if isinstance(metrics, dict):
-                rows.append({"task": task_label, "class": cls_name, **metrics})
+                rows.append({
+                    "task": task_label,
+                    "class": cls_name,
+                    "balanced_accuracy": bal if cls_name == "macro avg" else None,
+                    "macro_f1": f1 if cls_name == "macro avg" else None,
+                    "cohen_kappa": kappa if cls_name == "macro avg" else None,
+                    **metrics,
+                })
 
     eval_csv = os.path.join(RESULTS_DIR, "bn_eval_metrics.csv")
     pd.DataFrame(rows).to_csv(eval_csv, index=False)

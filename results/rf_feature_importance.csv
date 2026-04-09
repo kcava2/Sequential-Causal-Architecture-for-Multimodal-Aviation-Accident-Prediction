@@ -1,0 +1,31 @@
+model,feature,importance
+A (Supervisory),"Employment, Total Weighted Avg CY_QoQ_pct",0.8846472216296106
+A (Supervisory),Organizational Climate_Culture,0.05913048099819267
+A (Supervisory),Organizational Climate_Safety Climate,0.03827334772265904
+A (Supervisory),Organizational Climate_Structure,0.01794894964953742
+B (Operator),WeatherCondition_IMC,0.05098353508021657
+B (Operator),WeatherCondition_Unknown,0.02677601051840932
+B (Operator),WeatherCondition_VMC,0.04462613066393522
+B (Operator),TimeOfDay_Afternoon,0.022972868348314256
+B (Operator),TimeOfDay_Evening,0.029776883913292577
+B (Operator),TimeOfDay_Morning,0.02861764998978536
+B (Operator),SkyCondNonceil_CLER,0.028767206889286637
+B (Operator),SkyCondNonceil_FEW,0.02776130809269109
+B (Operator),SkyCondNonceil_OVCT,0.021197257114398124
+B (Operator),SkyCondNonceil_SCAT,0.0497032648507561
+B (Operator),SkyCondNonceil_UNK,0.018471651879022066
+B (Operator),SkyCondNonceil_Unknown,0.07670545783246381
+B (Operator),Personnel Conditions_Crew Resource Management,0.2004650784786057
+B (Operator),Personnel Conditions_Personal Readiness,0.2610982950375404
+B (Operator),Personnel Conditions_Unknown,0.00012558869796984803
+B (Operator),Supervisory Conditions_Failed to Correct Known Problem,0.023102882654427153
+B (Operator),Supervisory Conditions_Inadequate Supervision,0.03486694022156862
+B (Operator),Supervisory Conditions_Planned Inappropriate Operations,0.017640955979225197
+B (Operator),Supervisory Conditions_Supervisory Violations,0.03634103375809173
+C (Unsafe Acts),Supervisory Conditions_Failed to Correct Known Problem,0.040400778574138235
+C (Unsafe Acts),Supervisory Conditions_Inadequate Supervision,0.07360221624756363
+C (Unsafe Acts),Supervisory Conditions_Planned Inappropriate Operations,0.04359177832648669
+C (Unsafe Acts),Supervisory Conditions_Supervisory Violations,0.29657280175127154
+C (Unsafe Acts),Operator Conditions_Adverse Mental State,0.14858535172011492
+C (Unsafe Acts),Operator Conditions_Adverse Physiological State,0.20798975726156183
+C (Unsafe Acts),Operator Conditions_Mental Limitations,0.1892573161188632

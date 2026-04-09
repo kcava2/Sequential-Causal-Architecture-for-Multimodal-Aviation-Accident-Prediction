@@ -4,7 +4,7 @@ import pickle
 import torch
 import pandas as pd
 import numpy as np
-from sklearn.metrics import balanced_accuracy_score
+from sklearn.metrics import balanced_accuracy_score, f1_score, cohen_kappa_score
 from pgmpy.models import DiscreteBayesianNetwork
 from pgmpy.estimators import BayesianEstimator
 from pgmpy.inference import VariableElimination
@@ -128,7 +128,50 @@ def run_inference(model, df, drop_evidence=None):
     return true_A, true_B, true_C, pred_A, pred_B, pred_C
 
 
+# ── Helpers ───────────────────────────────────────────────────────────────────
+
+def _oversample_df(df, target_cols, random_state=42):
+    """
+    Random oversampling for multi-target discrete data.
+    For each target column, duplicates minority-class rows up to the majority-class count.
+    All per-target synthetic rows are pooled once and concatenated with the original df.
+    """
+    rng = np.random.default_rng(random_state)
+    extra_rows = []
+    for col in target_cols:
+        counts = df[col].value_counts()
+        majority_count = counts.iloc[0]
+        for cls, cnt in counts.items():
+            if cnt < majority_count:
+                minority_rows = df[df[col] == cls]
+                n_needed = majority_count - cnt
+                sampled = minority_rows.sample(
+                    n=n_needed, replace=True,
+                    random_state=int(rng.integers(0, 2**31))
+                )
+                extra_rows.append(sampled)
+    if extra_rows:
+        df_augmented = pd.concat([df] + extra_rows, ignore_index=True)
+        return df_augmented.sample(frac=1, random_state=random_state).reset_index(drop=True)
+    return df
+
+
 # ── Main ──────────────────────────────────────────────────────────────────────
+
+def fit_model(df_train_balanced, pseudo_counts=2):
+    """
+    Fit a DiscreteBayesianNetwork on a pre-balanced training DataFrame.
+    Returns the fitted model.
+    """
+    model = DiscreteBayesianNetwork(EDGES)
+    model.fit(
+        df_train_balanced,
+        estimator=BayesianEstimator,
+        prior_type="dirichlet",
+        pseudo_counts=pseudo_counts,
+    )
+    return model
+
 
 def main():
     FILEPATH   = os.path.join(os.path.dirname(__file__), "..", "..", "data", "scamaap dataset.csv")
@@ -152,13 +195,10 @@ def main():
     print()
 
     # ── Fit ───────────────────────────────────────────────────────────────────
-    model = DiscreteBayesianNetwork(EDGES)
-    model.fit(
-        df_train,
-        estimator=BayesianEstimator,
-        prior_type="dirichlet",
-        pseudo_counts=1,   # Laplace smoothing - needed for sparse CPTs
-    )
+    df_train_balanced = _oversample_df(df_train, ["Supervisory", "Operator", "UnsafeActs"], random_state=42)
+    print(f"Training rows after oversampling: {len(df_train_balanced)}  (original: {len(df_train)})")
+
+    model = fit_model(df_train_balanced, pseudo_counts=2)
 
     print("Model fitted. CPT entry counts per node:")
     for node in ["Supervisory", "Operator", "UnsafeActs"]:
@@ -169,15 +209,27 @@ def main():
     print()
 
     # ── Training accuracy ─────────────────────────────────────────────────────
-    print("Computing training balanced accuracy...")
+    print("Computing training metrics...")
     true_A, true_B, true_C, pred_A, pred_B, pred_C = run_inference(model, df_train)
-    bal_A = balanced_accuracy_score(true_A, pred_A)
-    bal_B = balanced_accuracy_score(true_B, pred_B)
-    bal_C = balanced_accuracy_score(true_C, pred_C)
-    print(f"Train BalAcc  A (Supervisory): {bal_A:.2%}")
-    print(f"Train BalAcc  B (Operator)   : {bal_B:.2%}")
-    print(f"Train BalAcc  C (Unsafe Acts): {bal_C:.2%}")
-    print(f"Train BalAcc  Average        : {(bal_A + bal_B + bal_C) / 3:.2%}")
+    bal_A  = balanced_accuracy_score(true_A, pred_A)
+    bal_B  = balanced_accuracy_score(true_B, pred_B)
+    bal_C  = balanced_accuracy_score(true_C, pred_C)
+    f1_A   = f1_score(true_A, pred_A, average="macro", zero_division=0)
+    f1_B   = f1_score(true_B, pred_B, average="macro", zero_division=0)
+    f1_C   = f1_score(true_C, pred_C, average="macro", zero_division=0)
+    kap_A  = cohen_kappa_score(true_A, pred_A)
+    kap_B  = cohen_kappa_score(true_B, pred_B)
+    kap_C  = cohen_kappa_score(true_C, pred_C)
+
+    print(f"\n{'─' * 72}")
+    print("Final Training Metrics")
+    print(f"{'─' * 72}")
+    print(f"{'Metric':<22} {'A (Supervisory)':>16} {'B (Operator)':>14} {'C (Unsafe Acts)':>16}")
+    print(f"{'─' * 72}")
+    print(f"{'Balanced Accuracy':<22} {bal_A:>16.2%} {bal_B:>14.2%} {bal_C:>16.2%}")
+    print(f"{'Macro F1':<22} {f1_A:>16.4f} {f1_B:>14.4f} {f1_C:>16.4f}")
+    print(f"{'Cohen Kappa':<22} {kap_A:>16.4f} {kap_B:>14.4f} {kap_C:>16.4f}")
+    print(f"{'─' * 72}")
 
     # ── Save ──────────────────────────────────────────────────────────────────
     with open(MODEL_PATH, "wb") as f:
