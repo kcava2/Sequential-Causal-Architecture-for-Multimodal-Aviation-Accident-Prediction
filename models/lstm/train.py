@@ -1,3 +1,4 @@
+import copy
 import os
 import sys
 import torch
@@ -13,9 +14,11 @@ from data.real_dataloader import get_dataloaders  # noqa: E402
 
 
 def class_weights(labels_tensor, n_classes, device):
-    """Inverse-frequency class weights."""
+    """Square-root-dampened class weights (softer than full inverse-frequency)."""
     labels = labels_tensor.numpy()
     weights = compute_class_weight("balanced", classes=np.arange(n_classes), y=labels)
+    weights = np.sqrt(weights)           # dampen extremes
+    weights = weights / weights.mean()   # re-normalize for stable scale
     return torch.tensor(weights, dtype=torch.float32, device=device)
 
 
@@ -115,7 +118,7 @@ def train_epoch(model, loader, optimizer, crit_A, crit_B, crit_C, device):
 
         optimizer.zero_grad()
         lA, lB, lC = model(s_a, s0)
-        loss        = crit_A(lA, y_A) + crit_B(lB, y_B) + crit_C(lC, y_C)
+        loss        = 1.5 * crit_A(lA, y_A) + 1.0 * crit_B(lB, y_B) + 1.5 * crit_C(lC, y_C)
         loss.backward()
         nn.utils.clip_grad_norm_(model.parameters(), max_norm=1.0)
         optimizer.step()
@@ -157,10 +160,12 @@ def evaluate(model, loader, device):
 def train_model(
     train_loader,
     encoders,
+    val_loader=None,
     hidden_size=64,
     lr=3e-4,
     dropout=0.2,
     epochs=500,
+    patience=200,
     device=None,
     verbose=True,
 ):
@@ -171,16 +176,18 @@ def train_model(
     ----------
     train_loader : DataLoader
     encoders     : SCAMAAPEncoders
+    val_loader   : DataLoader or None — if provided, uses early stopping on val focal loss
     hidden_size  : int
     lr           : float
     dropout      : float
     epochs       : int
+    patience     : int — early stopping patience (epochs without val improvement)
     device       : torch.device  (defaults to cuda if available)
     verbose      : bool — print per-epoch progress
 
     Returns
     -------
-    model   : trained HFACSCausalLSTM
+    model   : trained HFACSCausalLSTM (best checkpoint if val_loader provided)
     history : dict with lists 'loss', 'acc_A', 'acc_B', 'acc_C', 'acc_avg'
     """
     if device is None:
@@ -200,30 +207,69 @@ def train_model(
     )
 
     train_set = train_loader.dataset
-    crit_A = FocalLoss(weight=class_weights(train_set.y_A, n_A, device), gamma=2.0)
+    crit_A = FocalLoss(weight=class_weights(train_set.y_A, n_A, device), gamma=1.0)
     crit_B = FocalLoss(weight=class_weights(train_set.y_B, n_B, device), gamma=2.0)
-    crit_C = FocalLoss(weight=class_weights(train_set.y_C, n_C, device), gamma=2.0)
+    crit_C = FocalLoss(weight=class_weights(train_set.y_C, n_C, device), gamma=1.0)
 
     history = {"loss": [], "acc_A": [], "acc_B": [], "acc_C": [], "acc_avg": []}
+
+    best_val_loss = float("inf")
+    best_state    = None
+    no_improve    = 0
 
     for epoch in range(1, epochs + 1):
         loss, acc_A, acc_B, acc_C, acc_avg = train_epoch(
             model, train_loader, optimizer, crit_A, crit_B, crit_C, device
         )
-        scheduler.step(loss)
         history["loss"].append(loss)
         history["acc_A"].append(acc_A)
         history["acc_B"].append(acc_B)
         history["acc_C"].append(acc_C)
         history["acc_avg"].append(acc_avg)
 
+        val_loss = None
+        if val_loader is not None:
+            # Compute val focal loss — continuous signal, unaffected by class imbalance noise
+            model.eval()
+            total_val_loss = 0.0
+            with torch.no_grad():
+                for s_a, s0, y_A, y_B, y_C in val_loader:
+                    s_a = s_a.to(device)
+                    s0  = s0.to(device)
+                    y_A, y_B, y_C = y_A.to(device), y_B.to(device), y_C.to(device)
+                    lA, lB, lC = model(s_a, s0)
+                    total_val_loss += (
+                        1.5 * crit_A(lA, y_A) + 1.0 * crit_B(lB, y_B) + 1.5 * crit_C(lC, y_C)
+                    ).item()
+            model.train()
+            val_loss = total_val_loss / len(val_loader)
+            scheduler.step(val_loss)
+            if val_loss < best_val_loss:
+                best_val_loss = val_loss
+                best_state    = copy.deepcopy(model.state_dict())
+                no_improve    = 0
+            else:
+                no_improve += 1
+        else:
+            scheduler.step(loss)
+
         if verbose:
             current_lr = optimizer.param_groups[0]["lr"]
+            val_str = (f"  ValLoss: {val_loss:.4f} (best {best_val_loss:.4f})"
+                       if val_loader is not None else "")
             print(
                 f"Epoch {epoch:03d}/{epochs} | Loss: {loss:.4f} | "
                 f"BalAcc A: {acc_A:.2%}  B: {acc_B:.2%}  C: {acc_C:.2%}  Avg: {acc_avg:.2%} | "
-                f"LR: {current_lr:.2e}"
+                f"LR: {current_lr:.2e}{val_str}"
             )
+
+        if val_loader is not None and no_improve >= patience:
+            if verbose:
+                print(f"Early stopping at epoch {epoch} (no val loss improvement for {patience} epochs).")
+            break
+
+    if best_state is not None:
+        model.load_state_dict(best_state)
 
     return model, history
 
@@ -232,14 +278,14 @@ def train_model(
 
 def main():
     FILEPATH    = os.path.join(os.path.dirname(__file__), "..", "..", "data", "scamaap dataset.csv")
-    HIDDEN_SIZE = 64
+    HIDDEN_SIZE = 128
     BATCH_SIZE  = 32
     EPOCHS      = 500
-    LR          = 3e-4
-    DROPOUT     = 0.2
+    LR          = 1e-4
+    DROPOUT     = 0.1
     DEVICE      = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-    train_loader, _, _, encoders = get_dataloaders(FILEPATH, batch_size=BATCH_SIZE)
+    train_loader, val_loader, _, encoders = get_dataloaders(FILEPATH, batch_size=BATCH_SIZE)
 
     n_A = len(encoders.enc_supervisory.classes_)
     n_B = len(encoders.enc_operator.classes_)
@@ -271,6 +317,7 @@ def main():
 
     model, history = train_model(
         train_loader, encoders,
+        val_loader=val_loader,
         hidden_size=HIDDEN_SIZE, lr=LR, dropout=DROPOUT, epochs=EPOCHS,
         device=DEVICE, verbose=True,
     )
@@ -298,7 +345,7 @@ def main():
     print(f"{'─' * 72}\n")
 
     # ── Plots ─────────────────────────────────────────────────────────────────
-    epoch_range = range(1, EPOCHS + 1)
+    epoch_range = range(1, len(history["loss"]) + 1)
     _, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))
 
     ax1.plot(epoch_range, history["loss"], color="steelblue")

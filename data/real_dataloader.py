@@ -3,6 +3,7 @@ import numpy as np
 import torch
 from torch.utils.data import Dataset, DataLoader
 from sklearn.preprocessing import LabelEncoder
+from imblearn.combine import SMOTETomek
 from imblearn.over_sampling import SMOTE
 
 
@@ -179,7 +180,7 @@ def get_dataloaders(filepath, test_split=0.2, val_split=0.1, batch_size=32, seed
         if min_count < 2:
             return None, None
         k = min(5, min_count - 1)
-        sm = SMOTE(random_state=seed, k_neighbors=k)
+        sm = SMOTETomek(smote=SMOTE(random_state=seed, k_neighbors=k), random_state=seed)
         X_res, y_res = sm.fit_resample(X, y)
         return X_res[len(X):], y_res[len(y):]
 

@@ -12,9 +12,8 @@ def main():
     FILEPATH   = os.path.join(os.path.dirname(__file__), "..", "..", "data", "scamaap dataset.csv")
     MODEL_PATH = os.path.join(os.path.dirname(__file__), "hfacs_lstm.pt")
     OUT_PATH   = os.path.join(os.path.dirname(__file__), "..", "..", "results", "lstm_test_predictions.csv")
-    HIDDEN_SIZE = 64
-    BATCH_SIZE  = 32
-    DEVICE      = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    BATCH_SIZE = 32
+    DEVICE     = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
     _, _, test_loader, encoders = get_dataloaders(FILEPATH, batch_size=BATCH_SIZE)
 
@@ -22,8 +21,11 @@ def main():
     n_B = len(encoders.enc_operator.classes_)
     n_C = len(encoders.enc_unsafe.classes_)
 
-    model = HFACSCausalLSTM(hidden_size=HIDDEN_SIZE, n_A=n_A, n_B=n_B, n_C=n_C).to(DEVICE)
-    model.load_state_dict(torch.load(MODEL_PATH, map_location=DEVICE, weights_only=True))
+    ckpt = torch.load(MODEL_PATH, map_location=DEVICE, weights_only=True)
+    # Infer hidden_size from checkpoint so this always matches what was trained
+    hidden_size = ckpt["cell_a.weight_hh"].shape[1]
+    model = HFACSCausalLSTM(hidden_size=hidden_size, n_A=n_A, n_B=n_B, n_C=n_C).to(DEVICE)
+    model.load_state_dict(ckpt)
 
     all_A, all_B, all_C, pred_A, pred_B, pred_C = evaluate(model, test_loader, DEVICE)
 

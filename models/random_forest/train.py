@@ -5,6 +5,7 @@ import pickle
 import numpy as np
 import pandas as pd
 import torch
+from imblearn.combine import SMOTETomek
 from imblearn.over_sampling import SMOTE
 from sklearn.compose import ColumnTransformer
 from sklearn.ensemble import RandomForestClassifier
@@ -98,7 +99,7 @@ def _safe_smote(X, y, seed):
     if min_count < 2:
         return None, None
     k = min(5, min_count - 1)
-    sm = SMOTE(random_state=seed, k_neighbors=k)
+    sm = SMOTETomek(smote=SMOTE(random_state=seed, k_neighbors=k), random_state=seed)
     X_res, y_res = sm.fit_resample(X, y)
     return X_res[len(X):], y_res[len(y):]
 

@@ -15,6 +15,59 @@ from data.real_dataloader import get_dataloaders          # noqa: E402
 from models.lstm.train import HFACSCausalLSTM             # noqa: E402
 
 
+def _collect_probs(model, loader, device):
+    """Return softmax probability arrays (N, n_classes) for each task on the given loader."""
+    model.eval()
+    probs_A, probs_B, probs_C = [], [], []
+    true_A, true_B, true_C    = [], [], []
+    with torch.no_grad():
+        for s_a, s0, y_A, y_B, y_C in loader:
+            lA, lB, lC = model(s_a.to(device), s0.to(device))
+            probs_A.append(torch.softmax(lA, dim=1).cpu())
+            probs_B.append(torch.softmax(lB, dim=1).cpu())
+            probs_C.append(torch.softmax(lC, dim=1).cpu())
+            true_A.extend(y_A.tolist())
+            true_B.extend(y_B.tolist())
+            true_C.extend(y_C.tolist())
+    return (
+        torch.cat(probs_A).numpy(), np.array(true_A),
+        torch.cat(probs_B).numpy(), np.array(true_B),
+        torch.cat(probs_C).numpy(), np.array(true_C),
+    )
+
+
+def optimize_thresholds(probs, true, n_grid=20):
+    """
+    Find per-class thresholds that maximize balanced accuracy on the given set.
+    Uses the ratio form: predicted = argmax(prob[c] / threshold[c]).
+    Thresholds are searched independently per class in [0.1, 2.0].
+    Returns a 1-D numpy array of thresholds, one per class.
+    """
+    n_classes = probs.shape[1]
+    best_thresholds = np.ones(n_classes)
+    best_acc = balanced_accuracy_score(true, probs.argmax(axis=1))
+
+    grid = np.linspace(0.1, 2.0, n_grid)
+    thresholds = np.ones(n_classes)
+    for c in range(n_classes):
+        best_t = 1.0
+        for t in grid:
+            thresholds[c] = t
+            preds = (probs / thresholds).argmax(axis=1)
+            acc = balanced_accuracy_score(true, preds)
+            if acc > best_acc:
+                best_acc = acc
+                best_t = t
+        thresholds[c] = best_t
+        best_thresholds[c] = best_t
+
+    return best_thresholds
+
+
+def apply_thresholds(probs, thresholds):
+    return (probs / thresholds).argmax(axis=1)
+
+
 def run_inference(model, loader, device, noise_std=0.0):
     """Return (true_A, true_B, true_C, pred_A, pred_B, pred_C)."""
     model.eval()
@@ -42,7 +95,6 @@ def main():
     MODEL_PATH  = os.path.join(os.path.dirname(__file__), "hfacs_lstm.pt")
     FIG_DIR     = os.path.join(os.path.dirname(__file__), "..", "..", "figures")
     RESULTS_DIR = os.path.join(os.path.dirname(__file__), "..", "..", "results")
-    HIDDEN_SIZE  = 64
     BATCH_SIZE   = 32
     N_TRIALS     = 30
     NOISE_LEVELS = [0.0, 0.1, 0.25, 0.5, 1.0]
@@ -51,14 +103,16 @@ def main():
     os.makedirs(FIG_DIR, exist_ok=True)
     os.makedirs(RESULTS_DIR, exist_ok=True)
 
-    _, _, test_loader, encoders = get_dataloaders(FILEPATH, batch_size=BATCH_SIZE)
+    _, val_loader, test_loader, encoders = get_dataloaders(FILEPATH, batch_size=BATCH_SIZE)
 
     n_A = len(encoders.enc_supervisory.classes_)
     n_B = len(encoders.enc_operator.classes_)
     n_C = len(encoders.enc_unsafe.classes_)
 
-    model = HFACSCausalLSTM(hidden_size=HIDDEN_SIZE, n_A=n_A, n_B=n_B, n_C=n_C).to(DEVICE)
-    model.load_state_dict(torch.load(MODEL_PATH, map_location=DEVICE, weights_only=True))
+    ckpt = torch.load(MODEL_PATH, map_location=DEVICE, weights_only=True)
+    hidden_size = ckpt["cell_a.weight_hh"].shape[1]
+    model = HFACSCausalLSTM(hidden_size=hidden_size, n_A=n_A, n_B=n_B, n_C=n_C).to(DEVICE)
+    model.load_state_dict(ckpt)
     model.eval()
 
     # ── Classification reports ────────────────────────────────────────────────
@@ -138,6 +192,58 @@ def main():
     plt.savefig(cm_path, dpi=150)
     print(f"Confusion matrices saved to {cm_path}")
     plt.close()
+
+    # ── Threshold optimization (fit on val, apply to test) ────────────────────
+    print("\nOptimizing per-class decision thresholds on validation set...")
+    pA_v, tA_v, pB_v, tB_v, pC_v, tC_v = _collect_probs(model, val_loader, DEVICE)
+    thresh_A = optimize_thresholds(pA_v, tA_v)
+    thresh_B = optimize_thresholds(pB_v, tB_v)
+    thresh_C = optimize_thresholds(pC_v, tC_v)
+
+    pA_t, tA_t, pB_t, tB_t, pC_t, tC_t = _collect_probs(model, test_loader, DEVICE)
+    th_pred_A = apply_thresholds(pA_t, thresh_A)
+    th_pred_B = apply_thresholds(pB_t, thresh_B)
+    th_pred_C = apply_thresholds(pC_t, thresh_C)
+
+    th_bal_A = balanced_accuracy_score(tA_t, th_pred_A)
+    th_bal_B = balanced_accuracy_score(tB_t, th_pred_B)
+    th_bal_C = balanced_accuracy_score(tC_t, th_pred_C)
+    th_f1_A  = f1_score(tA_t, th_pred_A, average="macro", zero_division=0)
+    th_f1_B  = f1_score(tB_t, th_pred_B, average="macro", zero_division=0)
+    th_f1_C  = f1_score(tC_t, th_pred_C, average="macro", zero_division=0)
+    th_kap_A = cohen_kappa_score(tA_t, th_pred_A)
+    th_kap_B = cohen_kappa_score(tB_t, th_pred_B)
+    th_kap_C = cohen_kappa_score(tC_t, th_pred_C)
+
+    print("\nThresholded Test Metrics:")
+    print(f"{'Metric':<22} {'A (Supervisory)':>16} {'B (Operator)':>14} {'C (Unsafe Acts)':>16}")
+    print("-" * 72)
+    print(f"{'Balanced Accuracy':<22} {th_bal_A:>16.2%} {th_bal_B:>14.2%} {th_bal_C:>16.2%}")
+    print(f"{'Macro F1':<22} {th_f1_A:>16.4f} {th_f1_B:>14.4f} {th_f1_C:>16.4f}")
+    print(f"{'Cohen Kappa':<22} {th_kap_A:>16.4f} {th_kap_B:>14.4f} {th_kap_C:>16.4f}")
+
+    th_rows = []
+    for task_label, true, pred, enc, bal, f1, kappa in [
+        ("Supervisory (A)", tA_t, th_pred_A, encoders.enc_supervisory, th_bal_A, th_f1_A, th_kap_A),
+        ("Operator (B)",    tB_t, th_pred_B, encoders.enc_operator,    th_bal_B, th_f1_B, th_kap_B),
+        ("Unsafe Acts (C)", tC_t, th_pred_C, encoders.enc_unsafe,      th_bal_C, th_f1_C, th_kap_C),
+    ]:
+        report = classification_report(true, pred, target_names=enc.classes_,
+                                       zero_division=0, output_dict=True)
+        for cls_name, metrics in report.items():
+            if isinstance(metrics, dict):
+                th_rows.append({
+                    "task": task_label,
+                    "class": cls_name,
+                    "balanced_accuracy": bal if cls_name == "macro avg" else None,
+                    "macro_f1": f1 if cls_name == "macro avg" else None,
+                    "cohen_kappa": kappa if cls_name == "macro avg" else None,
+                    **metrics,
+                })
+
+    th_csv = os.path.join(RESULTS_DIR, "lstm_eval_metrics_thresholded.csv")
+    pd.DataFrame(th_rows).to_csv(th_csv, index=False)
+    print(f"Thresholded eval metrics saved to {th_csv}")
 
     # ── Sensitivity analysis ──────────────────────────────────────────────────
     print("\nRunning sensitivity analysis...")

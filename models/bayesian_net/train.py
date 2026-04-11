@@ -142,9 +142,12 @@ def _oversample_df(df, target_cols, random_state=42):
         counts = df[col].value_counts()
         majority_count = counts.iloc[0]
         for cls, cnt in counts.items():
-            if cnt < majority_count:
+            # Partial oversampling: bring minority classes to 50% of majority count
+            # (softer than 100% to avoid uniform CPTs that over-predict minorities)
+            target_count = int(majority_count * 0.5)
+            if cnt < target_count:
                 minority_rows = df[df[col] == cls]
-                n_needed = majority_count - cnt
+                n_needed = max(0, target_count - cnt)
                 sampled = minority_rows.sample(
                     n=n_needed, replace=True,
                     random_state=int(rng.integers(0, 2**31))
@@ -198,7 +201,7 @@ def main():
     df_train_balanced = _oversample_df(df_train, ["Supervisory", "Operator", "UnsafeActs"], random_state=42)
     print(f"Training rows after oversampling: {len(df_train_balanced)}  (original: {len(df_train)})")
 
-    model = fit_model(df_train_balanced, pseudo_counts=2)
+    model = fit_model(df_train_balanced, pseudo_counts=5)
 
     print("Model fitted. CPT entry counts per node:")
     for node in ["Supervisory", "Operator", "UnsafeActs"]:
