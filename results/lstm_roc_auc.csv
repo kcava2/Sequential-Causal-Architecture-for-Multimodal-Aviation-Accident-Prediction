@@ -1,0 +1,15 @@
+task,class,auc
+Supervisory,0,0.5346
+Supervisory,1,0.5562
+Supervisory,2,0.3505
+Supervisory,3,0.9417
+Supervisory,macro_avg,0.5957
+Operator,0,0.6661
+Operator,1,0.9382
+Operator,2,0.7458
+Operator,macro_avg,0.7834
+Unsafe Acts,0,0.7043
+Unsafe Acts,1,0.5219
+Unsafe Acts,2,0.6829
+Unsafe Acts,3,0.4571
+Unsafe Acts,macro_avg,0.5916

@@ -1,2 +1,2 @@
-best_pseudo_counts,bal_acc_supervisory,bal_acc_operator,bal_acc_unsafe_acts,bal_acc_avg,n_samples
-2,0.35677083333333337,0.6455840455840456,0.23421052631578948,0.4121884684110561,121
+best_pseudo_counts,bal_acc_avg,n_samples
+2,0.4121884684110561,121

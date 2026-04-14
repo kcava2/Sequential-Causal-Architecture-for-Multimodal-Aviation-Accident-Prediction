@@ -1,0 +1,15 @@
+task,class,auc
+Supervisory,Failed to Correct Known Problem,0.54
+Supervisory,Inadequate Supervision,0.5538
+Supervisory,Planned Inappropriate Operations,0.4355
+Supervisory,Supervisory Violations,0.2625
+Supervisory,macro_avg,0.448
+Operator,Adverse Mental State,0.7214
+Operator,Adverse Physiological State,0.9247
+Operator,Mental Limitations,0.8049
+Operator,macro_avg,0.817
+Unsafe Acts,Decision Errors,0.6909
+Unsafe Acts,Perceptual Errors,0.7861
+Unsafe Acts,Routine Violations,0.5177
+Unsafe Acts,Skill-based Errors,0.5236
+Unsafe Acts,macro_avg,0.6296

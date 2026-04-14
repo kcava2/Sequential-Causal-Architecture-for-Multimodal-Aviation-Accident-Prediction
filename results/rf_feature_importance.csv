@@ -1,31 +1,31 @@
 model,feature,importance
-A (Supervisory),"Employment, Total Weighted Avg CY_QoQ_pct",0.8736828431266176
-A (Supervisory),Organizational Climate_Culture,0.06880751774712521
-A (Supervisory),Organizational Climate_Safety Climate,0.037994192621496885
-A (Supervisory),Organizational Climate_Structure,0.01951544650476035
-B (Operator),WeatherCondition_IMC,0.046342749853845205
-B (Operator),WeatherCondition_Unknown,0.022800394360117732
-B (Operator),WeatherCondition_VMC,0.046541570627657014
-B (Operator),TimeOfDay_Afternoon,0.023244892839661076
-B (Operator),TimeOfDay_Evening,0.03156158000694699
-B (Operator),TimeOfDay_Morning,0.030346150974091407
-B (Operator),SkyCondNonceil_CLER,0.023928352915644623
-B (Operator),SkyCondNonceil_FEW,0.028200802002041357
-B (Operator),SkyCondNonceil_OVCT,0.023951657369717647
-B (Operator),SkyCondNonceil_SCAT,0.04873352784465025
-B (Operator),SkyCondNonceil_UNK,0.017652033688129603
-B (Operator),SkyCondNonceil_Unknown,0.0758153047651449
-B (Operator),Personnel Conditions_Crew Resource Management,0.21232260772321457
-B (Operator),Personnel Conditions_Personal Readiness,0.25638748885676177
-B (Operator),Personnel Conditions_Unknown,0.00010677788289248538
-B (Operator),Supervisory Conditions_Failed to Correct Known Problem,0.02246322253214311
-B (Operator),Supervisory Conditions_Inadequate Supervision,0.03431482893014009
-B (Operator),Supervisory Conditions_Planned Inappropriate Operations,0.018056633364565488
-B (Operator),Supervisory Conditions_Supervisory Violations,0.03722942346263477
-C (Unsafe Acts),Supervisory Conditions_Failed to Correct Known Problem,0.06251671007418656
-C (Unsafe Acts),Supervisory Conditions_Inadequate Supervision,0.0911406679477454
-C (Unsafe Acts),Supervisory Conditions_Planned Inappropriate Operations,0.055437030322848975
-C (Unsafe Acts),Supervisory Conditions_Supervisory Violations,0.30647793199956275
-C (Unsafe Acts),Operator Conditions_Adverse Mental State,0.09925967219637091
-C (Unsafe Acts),Operator Conditions_Adverse Physiological State,0.23307299920835903
-C (Unsafe Acts),Operator Conditions_Mental Limitations,0.15209498825092643
+A (Supervisory),"Employment, Total Weighted Avg CY_QoQ_pct",0.9233215256437527
+A (Supervisory),Organizational Climate_Culture,0.03671905108109343
+A (Supervisory),Organizational Climate_Safety Climate,0.030061971693687684
+A (Supervisory),Organizational Climate_Structure,0.009897451581466096
+B (Operator),WeatherCondition_IMC,0.05143960004635085
+B (Operator),WeatherCondition_Unknown,0.021136780350672967
+B (Operator),WeatherCondition_VMC,0.03930506493044979
+B (Operator),TimeOfDay_Afternoon,0.01744910025307366
+B (Operator),TimeOfDay_Evening,0.027838555147274586
+B (Operator),TimeOfDay_Morning,0.02452372241869775
+B (Operator),SkyCondNonceil_CLER,0.02601406071228108
+B (Operator),SkyCondNonceil_FEW,0.025911989972499532
+B (Operator),SkyCondNonceil_OVCT,0.02129831967946068
+B (Operator),SkyCondNonceil_SCAT,0.04927131300899058
+B (Operator),SkyCondNonceil_UNK,0.01978819167208727
+B (Operator),SkyCondNonceil_Unknown,0.07502558536780926
+B (Operator),Personnel Conditions_Crew Resource Management,0.2342002580731364
+B (Operator),Personnel Conditions_Personal Readiness,0.28646219025159453
+B (Operator),Personnel Conditions_Unknown,0.00017216099630455565
+B (Operator),Supervisory Conditions_Failed to Correct Known Problem,0.015144159237020855
+B (Operator),Supervisory Conditions_Inadequate Supervision,0.023045275666376
+B (Operator),Supervisory Conditions_Planned Inappropriate Operations,0.011697037488142267
+B (Operator),Supervisory Conditions_Supervisory Violations,0.03027663472777744
+C (Unsafe Acts),Supervisory Conditions_Failed to Correct Known Problem,0.0504747430645472
+C (Unsafe Acts),Supervisory Conditions_Inadequate Supervision,0.07384577478215601
+C (Unsafe Acts),Supervisory Conditions_Planned Inappropriate Operations,0.05033149830075699
+C (Unsafe Acts),Supervisory Conditions_Supervisory Violations,0.25701007706612433
+C (Unsafe Acts),Operator Conditions_Adverse Mental State,0.15603179435056114
+C (Unsafe Acts),Operator Conditions_Adverse Physiological State,0.23061979462717117
+C (Unsafe Acts),Operator Conditions_Mental Limitations,0.1816863178086832
