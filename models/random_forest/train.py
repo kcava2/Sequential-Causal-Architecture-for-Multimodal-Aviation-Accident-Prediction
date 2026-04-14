@@ -241,7 +241,8 @@ def trainPipeline(filepath=None):
 
     MODEL_PATH = os.path.join(os.path.dirname(__file__), "hfacs_rf.pkl")
 
-    df_train, df_val, df_test = load_and_split(filepath)
+    datasplit = load_and_split(filepath)
+    df_train, df_val, df_test = datasplit
     print(f"Train: {len(df_train)}  Val: {len(df_val)}  Test: {len(df_test)}")
 
     df_aug = build_augmented_df(df_train)
@@ -275,7 +276,7 @@ def trainPipeline(filepath=None):
     print(f"{'Macro F1':<22} {f1_A:>16.4f} {f1_B:>14.4f} {f1_C:>16.4f}")
     print(f"{'Cohen Kappa':<22} {kA:>16.4f} {kB:>14.4f} {kC:>16.4f}")
 
-    return model_1, model_2, model_3
+    return model_1, model_2, model_3, datasplit
 
 
 if __name__ == "__main__":
