@@ -1,7 +1,7 @@
 import os
 import sys
 import pickle
-
+import numpy as np
 import pandas as pd
 
 sys.path.append(os.path.join(os.path.dirname(__file__), "..", ".."))
@@ -41,6 +41,7 @@ def main():
         "Operator Conditions":    pred_B,
     })
     pred_C  = model_3.predict(input_3)
+    pred_C_prob  = model_3.predict_proba(input_3)
 
     out = pd.DataFrame({
         "true_supervisory":  true_A,
@@ -51,8 +52,12 @@ def main():
         "pred_unsafe_acts":  pred_C,
     })
 
+    pred_out = pd.DataFrame(pred_C_prob,columns=model_3.classes_)
+
     out_path = os.path.join(RESULTS_DIR, "rf_test_predictions.csv")
     out.to_csv(out_path, index=False)
+    out_path_pred = os.path.join(RESULTS_DIR, "rf_prob_predictions.csv")
+    pred_out.to_csv(out_path_pred, index=False)
     print(f"Test predictions saved to {out_path}  ({len(out)} rows)")
 
 
