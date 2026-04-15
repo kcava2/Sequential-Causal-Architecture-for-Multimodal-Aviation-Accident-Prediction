@@ -45,17 +45,41 @@ def _predict_cascade(model_1, model_2, model_3, df):
 
     return pred_A, pred_B, pred_C
 
-def _get_feature_names_shap(pipeline):
-    """Recover feature names after ColumnTransformer encoding."""
+def _get_feature_groups(pipeline):
+    """
+    Returns (original_names, group_indices) where group_indices[i] is the list
+    of column indices in the encoded matrix that belong to original feature i.
+    Numerical features map to a single index; OHE categorical features map to
+    all the columns produced for that category.
+    """
     ct = pipeline.named_steps["encoder"]
-    names = []
+    original_names = []
+    group_indices  = []
+    col_idx = 0
     for name, transformer, cols in ct.transformers_:
         if name == "num":
-            names.extend([clean_feature_name(c) for c in cols])
+            for c in cols:
+                original_names.append(clean_feature_name(c))
+                group_indices.append([col_idx])
+                col_idx += 1
         elif name == "cat":
-            raw_ohe = transformer.get_feature_names_out(cols)
-            names.extend([clean_feature_name(n) for n in raw_ohe])
-    return names
+            for orig_col in cols:
+                n_cats = len(transformer.categories_[list(cols).index(orig_col)])
+                original_names.append(clean_feature_name(orig_col))
+                group_indices.append(list(range(col_idx, col_idx + n_cats)))
+                col_idx += n_cats
+    return original_names, group_indices
+
+
+def _aggregate_shap(shap_values, data, group_indices):
+    """
+    Sum SHAP values across OHE columns that belong to the same original feature.
+    data values are averaged across the group (mean-encoded representation).
+    Returns (aggregated_shap, aggregated_data) — shape (n_samples, n_original_features).
+    """
+    agg_shap = np.column_stack([shap_values[:, idx].sum(axis=1) for idx in group_indices])
+    agg_data = np.column_stack([data[:, idx].mean(axis=1) for idx in group_indices])
+    return agg_shap, agg_data
 
 def main():
     FILEPATH    = os.path.join(os.path.dirname(__file__), "..", "..", "data", "scamaap dataset.csv")
@@ -120,44 +144,50 @@ def main():
     ]
 
     for label, pipeline, data in shap_config:
-        rf = pipeline.named_steps["rf"]
+        rf      = pipeline.named_steps["rf"]
         encoder = pipeline.named_steps["encoder"]
-        feat_names = _get_feature_names_shap(pipeline)
 
-        # Transform data and ensure it's a dense array
+        # Build feature groups: maps each original feature → its OHE column indices
+        orig_names, group_indices = _get_feature_groups(pipeline)
+
+        # Transform data to encoded space
         X_tx = encoder.transform(data)
-        if hasattr(X_tx, "toarray"): X_tx = X_tx.toarray()
-        
-        # Use the newer SHAP Explainer interface
-        explainer = shap.TreeExplainer(rf)
-        
-        # Calculate SHAP values - this returns an Explanation object
-        # Using check_additivity=False can prevent errors with some RF configurations
-        exp = explainer(X_tx, check_additivity=False)
-        
-        # FIX: Handle the dimension issue.
-        # exp.shape is (samples, features, classes). We must slice the class dimension.
-        # We take index [:, :, 0] to explain the first class.
-        if len(exp.shape) == 3:
-            exp_slice = exp[:, :, 0]
-        else:
-            exp_slice = exp
-        
-        # Assign the cleaned feature names back to the slice
-        exp_slice.feature_names = feat_names
+        if hasattr(X_tx, "toarray"):
+            X_tx = X_tx.toarray()
 
-        # Summary Plot (Beeswarm)
+        explainer = shap.TreeExplainer(rf)
+        exp = explainer(X_tx, check_additivity=False)
+
+        # Slice to class 0 → shape (n_samples, n_encoded_features)
+        if len(exp.shape) == 3:
+            sv   = exp.values[:, :, 0]
+            data_arr = exp.data[:, :]
+        else:
+            sv   = exp.values
+            data_arr = exp.data
+
+        # Aggregate OHE columns back to original features
+        sv_agg, data_agg = _aggregate_shap(sv, data_arr, group_indices)
+
+        base_val = float(np.mean(exp.base_values[:, 0]) if exp.base_values.ndim > 1
+                         else np.mean(exp.base_values))
+        exp_agg = shap.Explanation(
+            values=sv_agg,
+            base_values=base_val,
+            data=data_agg,
+            feature_names=orig_names,
+        )
+
         plt.figure()
-        shap.plots.beeswarm(exp_slice, max_display=12, show=False)
+        shap.plots.beeswarm(exp_agg, max_display=len(orig_names), show=False)
         plt.title(f"SHAP Summary: {label}")
-        plt.savefig(os.path.join(FIG_DIR, f"rf_shap_summary_{label}.png"), bbox_inches='tight')
+        plt.savefig(os.path.join(FIG_DIR, f"rf_shap_summary_{label}.png"), bbox_inches="tight")
         plt.close()
 
-        # Local Plot (Waterfall) - Explaining first sample
         plt.figure()
-        shap.plots.waterfall(exp_slice[0], max_display=12, show=False)
+        shap.plots.waterfall(exp_agg[0], max_display=len(orig_names), show=False)
         plt.title(f"SHAP Waterfall: {label} (Sample 0)")
-        plt.savefig(os.path.join(FIG_DIR, f"rf_shap_waterfall_{label}.png"), bbox_inches='tight')
+        plt.savefig(os.path.join(FIG_DIR, f"rf_shap_waterfall_{label}.png"), bbox_inches="tight")
         plt.close()
 
     print(f"\nEvaluation finished. Saved results and plots to {RESULTS_DIR} and {FIG_DIR}")
