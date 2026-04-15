@@ -1,2 +1,2 @@
-best_hidden_size,best_lr,best_dropout,bal_acc_supervisory,bal_acc_operator,bal_acc_unsafe_acts,bal_acc_avg,n_samples
-64,0.0001,0.2,0.234375,0.7484330484330485,0.3507309941520468,0.44451301419503175,121
+dropout,hidden_size,lr,bal_acc_avg,bal_acc_supervisory,bal_acc_operator,bal_acc_unsafe
+0.1,32,0.001,0.47027243589743595,0.28645833333333337,0.7743589743589744,0.35

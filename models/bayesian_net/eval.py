@@ -23,7 +23,7 @@ from models.bayesian_net.train import (  # noqa: E402
 
 from models.eval_utils import (  # noqa: E402
     clean_feature_name, apply_plot_style,
-    CONFUSION_FIGSIZE, plot_roc_curves, plot_sensitivity_bars
+    CONFUSION_FIGSIZE, plot_roc_curves, plot_sensitivity_bars, plot_confusion_matrices,
 )
 
 def _run_inference_probs(model, df):
@@ -147,7 +147,16 @@ def main():
         tasks=["Supervisory", "Operator", "Unsafe Acts"]
     )
 
-    # ── 3. SHAP Analysis (Strict Dimension Fix) ──────────────────────────
+    # ── 3. Confusion Matrices ────────────────────────────────────────────
+    print("\nPlotting Confusion Matrices...")
+    cm_data = [
+        ("Supervisory", ts_A,  pr_ts_A, sorted(set(ts_A))),
+        ("Operator",    ts_B,  pr_ts_B, sorted(set(ts_B))),
+        ("Unsafe Acts", ts_C,  pr_ts_C, sorted(set(ts_C))),
+    ]
+    plot_confusion_matrices(cm_data, "BN", os.path.join(FIG_DIR, "bn_confusion_matrices.png"))
+
+    # ── 4. SHAP Analysis (Strict Dimension Fix) ──────────────────────────
     print("\nComputing BN SHAP (KernelExplainer)...")
     bn_enc = {col: LE().fit(df_test[col].astype(str)) for col in EVIDENCE_COLS}
     X_numeric = np.column_stack([bn_enc[col].transform(df_test[col].astype(str)) for col in EVIDENCE_COLS]).astype(float)

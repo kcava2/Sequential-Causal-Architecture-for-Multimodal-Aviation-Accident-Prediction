@@ -1,0 +1,22 @@
+ablated,task,mean_drop,std_drop
+Baseline,Supervisory,0.0,0.0
+Baseline,Operator,0.0,0.0
+Baseline,Unsafe Acts,0.0,0.0
+Org. Climate,Supervisory,0.03331933024551336,0.03317238932789944
+Org. Climate,Operator,0.0,0.0
+Org. Climate,Unsafe Acts,0.0,0.0
+Employment,Supervisory,0.19823079874215574,0.07326282683007751
+Employment,Operator,0.0,0.0
+Employment,Unsafe Acts,0.0,0.0
+Weather,Supervisory,0.0,0.0
+Weather,Operator,0.10912244562611624,0.027265526946417876
+Weather,Unsafe Acts,-0.011341395341630239,0.06639149007056704
+Time of Day,Supervisory,0.0,0.0
+Time of Day,Operator,-0.034370994342184095,0.021116806560338746
+Time of Day,Unsafe Acts,0.027408007249343832,0.052644688772756645
+Sky Cond.,Supervisory,0.0,0.0
+Sky Cond.,Operator,0.12009164240374551,0.0319799262145318
+Sky Cond.,Unsafe Acts,0.22117450219662915,0.10033837481921969
+Personnel,Supervisory,0.0,0.0
+Personnel,Operator,0.29281265957884417,0.024095885827846535
+Personnel,Unsafe Acts,-0.01024756787110632,0.03925143313329717

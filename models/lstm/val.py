@@ -98,8 +98,6 @@ def main():
         fold_scores = []
         
         # 5-Fold Cross Validation
-        # Note: In deep learning, we often use a single validation set for speed,
-        # but here is the 5-fold loop as requested.
         for fold in range(5):
             model, _ = train_model(
                 train_loader, encoders,

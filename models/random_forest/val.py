@@ -12,7 +12,7 @@ from models.random_forest.train import (  # noqa: E402
     TARGET_A, TARGET_B, TARGET_C, RAND_STATE,
 )
 
-# Hyperparameter search space (scored by balanced_accuracy to match LSTM/BN)
+# Hyperparameter search space 
 PARAM_GRID = {
     "rf__n_estimators":      [50, 100, 200],
     "rf__criterion":         ["gini", "entropy"],

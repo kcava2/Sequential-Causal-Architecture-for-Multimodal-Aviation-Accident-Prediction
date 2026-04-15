@@ -144,7 +144,7 @@ def _oversample_df(df, target_cols, random_state=42):
         for cls, cnt in counts.items():
             # Partial oversampling: bring minority classes to 50% of majority count
             # (softer than 100% to avoid uniform CPTs that over-predict minorities)
-            target_count = int(majority_count * 0.5)
+            target_count = int(majority_count * 0.3)
             if cnt < target_count:
                 minority_rows = df[df[col] == cls]
                 n_needed = max(0, target_count - cnt)

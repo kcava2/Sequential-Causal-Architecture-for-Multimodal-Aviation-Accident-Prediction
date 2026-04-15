@@ -22,7 +22,7 @@ from models.random_forest.train import (  # noqa: E402
 # Adjust if your eval_utils is in a different directory
 from models.eval_utils import (  # noqa: E402
     TASK_COLORS, clean_feature_name, apply_plot_style,
-    CONFUSION_FIGSIZE, plot_roc_curves,
+    CONFUSION_FIGSIZE, plot_roc_curves, plot_confusion_matrices,
 )
 
 def _predict_cascade(model_1, model_2, model_3, df):
@@ -101,7 +101,16 @@ def main():
         print(f"\n── {lbl} ──")
         print(classification_report(true, pred, zero_division=0))
 
-    # ── 3. Fixed SHAP Analysis (All Models) ──────────────────────────────────
+    # ── 3. Confusion Matrices ───────────────────────────────────────────────
+    print("\nPlotting Confusion Matrices...")
+    cm_data = [
+        ("Supervisory", df_test[TARGET_A].tolist(), ts_A.tolist(), sorted(df_test[TARGET_A].unique())),
+        ("Operator",    df_test[TARGET_B].tolist(), ts_B.tolist(), sorted(df_test[TARGET_B].unique())),
+        ("Unsafe Acts", df_test[TARGET_C].tolist(), ts_C.tolist(), sorted(df_test[TARGET_C].unique())),
+    ]
+    plot_confusion_matrices(cm_data, "RF", os.path.join(FIG_DIR, "rf_confusion_matrices.png"))
+
+    # ── 4. Fixed SHAP Analysis (All Models) ──────────────────────────────────
     print("\nComputing SHAP explanations (Fixing Dimensionality)...")
     
     shap_config = [

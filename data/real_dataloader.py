@@ -169,18 +169,32 @@ def get_dataloaders(filepath, test_split=0.2, val_split=0.1, batch_size=32, seed
 
     from sklearn.neighbors import NearestNeighbors
 
-    def _safe_smote(X, y, seed):
+    def _safe_smote(X, y, seed, target_ratio=0.3):
         """
-        Run SMOTE with k_neighbors automatically reduced for tiny classes.
+        Run partial SMOTE — brings minority classes to `target_ratio * majority_count`
+        instead of full balance. Reduces synthetic inflation while still addressing
+        the worst class imbalance.
         Returns (X_synthetic, y_synthetic) — only the NEW synthetic rows, not the originals.
-        Returns (None, None) if the smallest class has only 1 sample (cannot interpolate).
+        Returns (None, None) if oversampling is not possible or not needed.
         """
         counts = np.bincount(y)
         min_count = counts[counts > 0].min()
         if min_count < 2:
             return None, None
+        majority_count = counts.max()
+        target_count = int(majority_count * target_ratio)
+        strategy = {
+            cls: target_count
+            for cls, cnt in enumerate(counts)
+            if 0 < cnt < target_count
+        }
+        if not strategy:
+            return None, None
         k = min(5, min_count - 1)
-        sm = SMOTETomek(smote=SMOTE(random_state=seed, k_neighbors=k), random_state=seed)
+        sm = SMOTETomek(
+            smote=SMOTE(random_state=seed, k_neighbors=k, sampling_strategy=strategy),
+            random_state=seed,
+        )
         X_res, y_res = sm.fit_resample(X, y)
         return X_res[len(X):], y_res[len(y):]
 

@@ -1,6 +1,5 @@
 import os
 import sys
-import pickle
 import warnings
 
 import shap
@@ -10,7 +9,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.metrics import (
-    classification_report, confusion_matrix, ConfusionMatrixDisplay,
+    classification_report,
     balanced_accuracy_score, f1_score, cohen_kappa_score,
 )
 
@@ -23,8 +22,7 @@ from data.real_dataloader import get_dataloaders  # noqa: E402
 from models.lstm.train import HFACSCausalLSTM, evaluate # noqa: E402
 
 from models.eval_utils import (  # noqa: E402
-    TASK_COLORS, clean_feature_name, apply_plot_style,
-    CONFUSION_FIGSIZE, plot_roc_curves, plot_sensitivity_bars,
+    clean_feature_name, plot_roc_curves, plot_sensitivity_bars, plot_confusion_matrices,
 )
 
 # --- Helper Functions ---
@@ -190,7 +188,16 @@ def main():
                             ("Unsafe Acts", ts_tC, ts_pC, encoders.enc_unsafe)]:
         print(f"\n── {lbl} ──\n", classification_report(t, p, target_names=enc.classes_, zero_division=0))
 
-    # ── 4. SHAP Analysis ──
+    # ── 4. Confusion Matrices ──
+    print("\nPlotting Confusion Matrices...")
+    cm_data = [
+        ("Supervisory", ts_tA, ts_pA, encoders.enc_supervisory.classes_),
+        ("Operator",    ts_tB, ts_pB, encoders.enc_operator.classes_),
+        ("Unsafe Acts", ts_tC, ts_pC, encoders.enc_unsafe.classes_),
+    ]
+    plot_confusion_matrices(cm_data, "LSTM", os.path.join(FIG_DIR, "lstm_confusion_matrices.png"))
+
+    # ── 5. SHAP Analysis ──
     print("\nComputing LSTM SHAP (GradientExplainer)...")
     X_cat = torch.cat([s_a_ts, s0_ts], dim=1).to(DEVICE)
     feat_names = [clean_feature_name(f) for f in ["Org. Climate", "Employment", "Weather", "Time of Day", "Sky Cond.", "Personnel", "Supervisory"]]

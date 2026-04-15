@@ -15,7 +15,7 @@ import matplotlib
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-from sklearn.metrics import roc_curve, auc
+from sklearn.metrics import roc_curve, auc, confusion_matrix, ConfusionMatrixDisplay
 from sklearn.preprocessing import label_binarize
 
 # ── Color scheme (consistent across all model eval scripts) ──────────────────
@@ -223,6 +223,38 @@ def plot_roc_curves(task_data, title_prefix, save_path, csv_path=None):
     if csv_path:
         pd.DataFrame(csv_rows).to_csv(csv_path, index=False)
         print(f"ROC AUC CSV saved to {csv_path}")
+
+
+# ── Confusion matrix helper ───────────────────────────────────────────────────
+
+def plot_confusion_matrices(task_data, title_prefix, save_path):
+    """
+    Draw a 1×3 subplot of normalised confusion matrices, one per task.
+
+    Parameters
+    ----------
+    task_data    : list of (task_label, true_labels, pred_labels, class_names)
+    title_prefix : string prefix for the figure suptitle
+    save_path    : full .png path
+    """
+    apply_plot_style()
+    fig, axes = plt.subplots(1, 3, figsize=CONFUSION_FIGSIZE)
+
+    for ax, (task_label, true, pred, class_names) in zip(axes, task_data):
+        cm      = confusion_matrix(true, pred, normalize="true")
+        display = _TASK_DISPLAY.get(task_label, task_label)
+
+        disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=class_names)
+        disp.plot(ax=ax, colorbar=False, cmap="Blues", values_format=".2f")
+
+        ax.set_title(f"{display} Conditions")
+        ax.tick_params(axis="x", rotation=30)
+
+    fig.suptitle(f"{title_prefix} — Confusion Matrices (Row-Normalised)", fontsize=12)
+    plt.tight_layout()
+    plt.savefig(save_path, dpi=150, bbox_inches="tight")
+    plt.close("all")
+    print(f"Confusion matrices saved to {save_path}")
 
 
 # ── Sensitivity grouped bar-chart helper ─────────────────────────────────────
